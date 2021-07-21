@@ -1,0 +1,8 @@
+groupInfo:
+  groupID: 203083412
+  groupToken: 'f59262e9781b63e87616b7eb90277b32a1e296ab83b29d2f81308ed6dc3e9fef8634b28311801cb0d152d'
+  #groupID: 203218213
+  #groupToken: 'a765d526aec8943e4f6a79e8d49fbde998bc7de53ae91e24c13785ac0d0fcac390e5f0d738bf92d0a0031'
+settings:
+  delay: 15 #ВНИМАНИЕ! Не ставьте слишком низкие числа ( не ниже 10)
+  disableGroupListener: true #Плагин будет игнорировать сообщения от групп
