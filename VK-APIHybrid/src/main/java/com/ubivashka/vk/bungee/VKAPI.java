@@ -64,7 +64,10 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 				+ "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
 						ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
 				+ ChatColor.AQUA + "╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝\r\n");
-
+		if (ts == null) {
+			System.out.println(ChatColor.RED + "ERROR occured while enabling group");
+			return;
+		}
 		System.out.println(ChatColor.GREEN + "Group launched");
 		new LongpollAPI(this);
 		this.vkutil = new VKUtil(this);

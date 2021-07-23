@@ -52,7 +52,10 @@ public class VKAPI extends JavaPlugin implements VKAPIPlugin {
 						+ "  //####   /##//##       /##//////##/##      /##\r\n" + ChatColor.BLUE
 						+ "   //##    /## //##      /##     /##/##      /##\r\n" + ChatColor.BLUE
 						+ "    //     //   //       //      // //       // \r\n");
-
+		if (ts == null) {
+			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "ERROR occured while enabling group");
+			return;
+		}
 		debug("Group launched!");
 
 		longPoolAPI = new LongpollAPI(this);
