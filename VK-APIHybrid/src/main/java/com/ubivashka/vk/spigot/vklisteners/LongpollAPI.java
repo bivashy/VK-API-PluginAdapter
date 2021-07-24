@@ -67,8 +67,6 @@ public class LongpollAPI {
 			}
 
 			private void handleEvents() throws ApiException, ClientException {
-				if (this.isCancelled())
-					return;
 				GetLongPollEventsResponse events = plugin.getVK().longPoll()
 						.getEvents(longserver.getServer(), longserver.getKey(), ts).waitTime(20).execute();
 
