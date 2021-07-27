@@ -652,12 +652,13 @@ public class CallbackAPI implements CallbackLongpoolAPI {
 			LOG.warn("Unsupported callback event: " + type, type);
 			return false;
 		}
-		if (type.equalsIgnoreCase(CALLBACK_EVENT_MESSAGE_NEW)) {
-			JsonElement messageElement = json.getAsJsonObject("object").get("message");
-			json.getAsJsonObject("object").remove("client_info");
-			json.getAsJsonObject("object").remove("message");
-			json.add("object", messageElement);
-		}
+		if (json != null && json.has("object") && json.getAsJsonObject("object").has("client_info"))
+			if (type.equalsIgnoreCase(CALLBACK_EVENT_MESSAGE_NEW)) {
+				JsonElement messageElement = json.getAsJsonObject("object").get("message");
+				json.getAsJsonObject("object").remove("client_info");
+				json.getAsJsonObject("object").remove("message");
+				json.add("object", messageElement);
+			}
 
 		CallbackMessage<Object> message = gson.fromJson(json, typeOfClass);
 
