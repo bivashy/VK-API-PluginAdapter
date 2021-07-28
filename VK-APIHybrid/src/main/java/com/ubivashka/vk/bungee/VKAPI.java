@@ -24,6 +24,7 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
+import net.md_5.bungee.api.plugin.Event;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -159,7 +160,9 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 						|| message.startsWith("SLF4J: Failed to load class")
 						|| message.startsWith("SLF4J: Defaulting to no-operation")
 						|| message.startsWith("SLF4J: See http:")
-						|| (message.contains("lp.vk.com") && record.getLevel() == Level.SEVERE))
+						|| (message.contains("lp.vk.com") && record.getLevel() == Level.SEVERE)
+						|| (message.startsWith("Event com.ubivashka.vk.bungee.events")
+								&& record.getLevel() == Level.WARNING))
 					return false;
 				return true;
 			}
@@ -168,8 +171,8 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 
 	@Override
 	public void callEvent(VKEvent event) {
-		if (event instanceof net.md_5.bungee.api.plugin.Event)
-			ProxyServer.getInstance().getPluginManager().callEvent((net.md_5.bungee.api.plugin.Event) event);
+		if (event instanceof Event)
+			ProxyServer.getInstance().getPluginManager().callEvent((Event) event);
 	}
 
 	@Override
