@@ -13,7 +13,6 @@ import com.vk.api.sdk.objects.callback.longpoll.responses.GetLongPollEventsRespo
 import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse;
 
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.plugin.Event;
 
 public class LongpollAPI {
 	private static final int MILLI_PER_TICK = 1000 / 20;
@@ -81,7 +80,7 @@ public class LongpollAPI {
 
 	private void callEvent(JsonObject json) {
 		VKJsonEvent jsonEvent = new VKJsonEvent(json);
-		plugin.getProxy().getPluginManager().callEvent((Event) jsonEvent);
+		plugin.callEvent(jsonEvent);
 		plugin.getCallbackAPI().parse(json);
 	}
 
