@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
@@ -161,7 +162,7 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 						|| message.startsWith("SLF4J: Defaulting to no-operation")
 						|| message.startsWith("SLF4J: See http:")
 						|| (message.contains("lp.vk.com") && record.getLevel() == Level.SEVERE)
-						|| (message.startsWith("Event com.ubivashka.vk.bungee.events")
+						|| (message.startsWith("Event {0}") && record.getParameters().length>0 && record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
 								&& record.getLevel() == Level.WARNING))
 					return false;
 				return true;
