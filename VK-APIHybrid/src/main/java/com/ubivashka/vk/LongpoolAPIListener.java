@@ -1,11 +1,8 @@
-package com.ubivashka.vk.bungee.vklisteners;
+package com.ubivashka.vk;
 
 import java.util.concurrent.TimeUnit;
 
 import com.google.gson.JsonObject;
-import com.ubivashka.vk.bungee.ProxyRunnable;
-import com.ubivashka.vk.bungee.VKAPI;
-import com.ubivashka.vk.bungee.events.VKJsonEvent;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.exceptions.LongPollServerKeyExpiredException;
@@ -14,10 +11,10 @@ import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class LongpollAPI {
+public class LongpoolAPIListener {
 	private static final int MILLI_PER_TICK = 1000 / 20;
 
-	private VKAPI plugin;
+	private VKAPIPlugin plugin;
 
 	private String ts;
 
@@ -26,7 +23,7 @@ public class LongpollAPI {
 
 	private GetLongPollServerResponse longserver;
 
-	public LongpollAPI(VKAPI plugin) {
+	public LongpoolAPIListener(VKAPIPlugin plugin) {
 		this.plugin = plugin;
 		updateKey();
 		ts = longserver.getTs();
@@ -35,7 +32,7 @@ public class LongpollAPI {
 
 	private void startEventListener() {
 		System.out.println(ChatColor.GREEN + "LongPool event listener enabled");
-		new ProxyRunnable() {
+		Scheduler.scheduleAtFixedRate(new CancellableRunnable() {
 
 			public void run() {
 				try {
@@ -64,7 +61,7 @@ public class LongpollAPI {
 				GetLongPollEventsResponse events = (GetLongPollEventsResponse) plugin.getVK().longPoll()
 						.getEvents(longserver.getServer(), longserver.getKey(), ts).waitTime(10).execute();
 				for (JsonObject json : events.getUpdates()) {
-					callEvent(json);
+					plugin.callEvent(json);
 				}
 				ts = events.getTs();
 				delay = 2;
@@ -74,14 +71,7 @@ public class LongpollAPI {
 					reconnecting = false;
 				}
 			}
-		}.runAfterEvery(plugin, 0L, plugin.getConfig().getInt("settings.delay") * MILLI_PER_TICK,
-				TimeUnit.MILLISECONDS);
-	}
-
-	private void callEvent(JsonObject json) {
-		VKJsonEvent jsonEvent = new VKJsonEvent(json);
-		plugin.callEvent(jsonEvent);
-		plugin.getCallbackAPI().parse(json);
+		}, 0L, plugin.getDelay() * MILLI_PER_TICK, TimeUnit.MILLISECONDS);
 	}
 
 	private void updateKey() {
@@ -90,7 +80,6 @@ public class LongpollAPI {
 					.getLongPollServer(plugin.getActor(), plugin.getActor().getGroupId().intValue()).execute();
 		} catch (ApiException | com.vk.api.sdk.exceptions.ClientException e) {
 			e.printStackTrace();
-			return;
 		}
 	}
 }

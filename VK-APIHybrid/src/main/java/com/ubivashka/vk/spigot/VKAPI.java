@@ -6,12 +6,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.google.gson.JsonObject;
 import com.ubivashka.vk.CallbackLongpoolAPI;
+import com.ubivashka.vk.LongpoolAPIListener;
 import com.ubivashka.vk.VKAPIPlugin;
 import com.ubivashka.vk.VKEvent;
+import com.ubivashka.vk.spigot.events.VKJsonEvent;
 import com.ubivashka.vk.spigot.logfilter.LogFilter;
 import com.ubivashka.vk.spigot.utils.CallbackAPI;
-import com.ubivashka.vk.spigot.vklisteners.LongpollAPI;
 import com.ubivashka.vk.utils.VKUtil;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -24,7 +26,6 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 public class VKAPI extends JavaPlugin implements VKAPIPlugin {
 	private VKUtil vkutil;
 	private CallbackAPI callbackAPI;
-	private LongpollAPI longPoolAPI;
 
 	private Random random;
 	private Integer ts = null;
@@ -58,14 +59,9 @@ public class VKAPI extends JavaPlugin implements VKAPIPlugin {
 		}
 		debug("Group launched!");
 
-		longPoolAPI = new LongpollAPI(this);
+		new LongpoolAPIListener(this);
 		vkutil = new VKUtil(this);
 		callbackAPI = new CallbackAPI(this);
-	}
-
-	public void onDisable() {
-		Bukkit.getServer().getScheduler().cancelTasks(this);
-		Bukkit.getServer().getScheduler().cancelTask(longPoolAPI.getTask().getTaskId());
 	}
 
 	public static VKAPI getInstance() {
@@ -159,6 +155,19 @@ public class VKAPI extends JavaPlugin implements VKAPIPlugin {
 		vk = new VkApiClient(transportClient);
 		random = new Random();
 		actor = new GroupActor(getConfig().getInt("groupInfo.groupID"), getConfig().getString("groupInfo.groupToken"));
+	}
+
+	public void callEvent(JsonObject json) {
+		if (json == null)
+			return;
+		VKJsonEvent jsonEvent = new VKJsonEvent(json);
+		callEvent(jsonEvent);
+		getCallbackAPI().parse(json);
+	}
+
+	@Override
+	public int getDelay() {
+		return getConfig().getInt("settings.delay");
 	}
 
 }

@@ -115,7 +115,7 @@ public class CallbackAPI implements CallbackLongpoolAPI {
 	private static final String CALLBACK_EVENT_WALL_REPLY_RESTORE = "wall_reply_restore";
 	private static final String CALLBACK_EVENT_WALL_REPLY_DELETE = "wall_reply_delete";
 	private static final String CALLBACK_EVENT_LIKE_ADD = "like_add";
-	private static final String CALLBACK_EVENT_LIKE_REMOVE = "like_remove	";
+	private static final String CALLBACK_EVENT_LIKE_REMOVE = "like_remove";
 	private static final String CALLBACK_EVENT_BOARD_POST_NEW = "board_post_new";
 	private static final String CALLBACK_EVENT_BOARD_POST_EDIT = "board_post_edit";
 	private static final String CALLBACK_EVENT_BOARD_POST_RESTORE = "board_post_restore";

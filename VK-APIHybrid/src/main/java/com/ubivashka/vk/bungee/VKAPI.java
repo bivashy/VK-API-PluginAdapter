@@ -3,17 +3,19 @@ package com.ubivashka.vk.bungee;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.CopyOption;
 import java.nio.file.Files;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
+import com.google.gson.JsonObject;
 import com.ubivashka.vk.CallbackLongpoolAPI;
+import com.ubivashka.vk.LongpoolAPIListener;
 import com.ubivashka.vk.VKAPIPlugin;
 import com.ubivashka.vk.VKEvent;
+import com.ubivashka.vk.bungee.events.VKJsonEvent;
 import com.ubivashka.vk.bungee.utils.CallbackAPI;
-import com.ubivashka.vk.bungee.vklisteners.LongpollAPI;
 import com.ubivashka.vk.utils.VKUtil;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -51,7 +53,7 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 	public void onEnable() {
 		instance = this;
 		loadDefaultFilter();
-		loadConfig();
+		this.config = loadConfiguration(getDataFolder(), getResourceAsStream("config.yml"));
 		registerVK();
 		System.out.println("\r\n\r\n" + ChatColor.DARK_AQUA
 				+ "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
@@ -71,7 +73,7 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 			return;
 		}
 		System.out.println(ChatColor.GREEN + "Group launched");
-		new LongpollAPI(this);
+		new LongpoolAPIListener(this);
 		this.vkutil = new VKUtil(this);
 		this.callbackAPI = new CallbackAPI(this);
 	}
@@ -116,35 +118,20 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 		}
 	}
 
-	private void loadConfig() {
+	private Configuration loadConfiguration(File folder, InputStream resourceAsStream) {
 		try {
-			if (!getDataFolder().exists())
-				getDataFolder().mkdir();
-			File file = new File(getDataFolder(), "config.yml");
-			if (!file.exists())
-				try {
-					InputStream in = getResourceAsStream("config.yml");
-					try {
-						Files.copy(in, file.toPath(), new java.nio.file.CopyOption[0]);
-						if (in != null)
-							in.close();
-					} catch (Throwable throwable) {
-						if (in != null)
-							try {
-								in.close();
-							} catch (Throwable throwable1) {
-								throwable.addSuppressed(throwable1);
-							}
-						throw throwable;
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			this.config = ConfigurationProvider.getProvider(YamlConfiguration.class)
-					.load(new File(getDataFolder(), "config.yml"));
-		} catch (IOException e) {
-			e.printStackTrace();
+			if (!folder.exists())
+				folder.mkdir();
+
+			File config = new File(folder + File.separator + "config.yml");
+			if (!config.exists())
+				Files.copy(resourceAsStream, config.toPath(), new CopyOption[0]);
+			Configuration defaults = ConfigurationProvider.getProvider(YamlConfiguration.class).load(resourceAsStream);
+			return ConfigurationProvider.getProvider(YamlConfiguration.class).load(config, defaults);
+		} catch (IOException exception) {
+			exception.printStackTrace();
 		}
+		return null;
 	}
 
 	public Configuration getConfig() {
@@ -162,7 +149,8 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 						|| message.startsWith("SLF4J: Defaulting to no-operation")
 						|| message.startsWith("SLF4J: See http:")
 						|| (message.contains("lp.vk.com") && record.getLevel() == Level.SEVERE)
-						|| (message.startsWith("Event {0}") && record.getParameters().length>0 && record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
+						|| (message.startsWith("Event {0}") && record.getParameters().length > 0
+								&& record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
 								&& record.getLevel() == Level.WARNING))
 					return false;
 				return true;
@@ -213,5 +201,18 @@ public class VKAPI extends Plugin implements VKAPIPlugin {
 		this.actor = new GroupActor(Integer.valueOf(getConfig().getInt("groupInfo.groupID")),
 				getConfig().getString("groupInfo.groupToken"));
 		setTS();
+	}
+
+	public void callEvent(JsonObject json) {
+		if (json == null)
+			return;
+		VKJsonEvent jsonEvent = new VKJsonEvent(json);
+		callEvent(jsonEvent);
+		getCallbackAPI().parse(json);
+	}
+
+	@Override
+	public int getDelay() {
+		return getConfig().getInt("settings.delay");
 	}
 }
