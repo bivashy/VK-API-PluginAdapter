@@ -1,1 +1,16 @@
 /target/
+/.classpath
+/.project
+/.settings
+/bukkit/.settings
+/bukkit/.classpath
+/bukkit/target
+/bukkit/.project
+/bungee/.settings
+/bungee/.classpath
+/bungee/target
+/bungee/.project
+/core/.project
+/core/.classpath
+/core/target
+/core/.settings

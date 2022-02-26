@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.ubivashka</groupId>
+		<artifactId>vk-api.parent</artifactId>
+		<version>0.3.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>vk-api.bungee</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.file.name>VK-API-Bungee</project.file.name>
+	
+		<!-- Dependencies -->
+		<bungeecord-api.version>1.18-R0.1-SNAPSHOT</bungeecord-api.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>bungeecord-repo</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- Core -->
+		<dependency>
+			<groupId>com.ubivashka</groupId>
+			<artifactId>vk-api.core</artifactId>
+			<version>${core.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- BungeeCord API -->
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-api</artifactId>
+			<version>${bungeecord-api.version}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- BungeeCord Javadoc -->
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-api</artifactId>
+			<version>${bungeecord-api.version}</version>
+			<type>javadoc</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- BungeeCord Logging API -->
+		<dependency>
+			<groupId>net.md-5</groupId>
+			<artifactId>bungeecord-log</artifactId>
+			<version>${bungeecord-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
