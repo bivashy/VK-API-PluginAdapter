@@ -1,3 +1,4 @@
 name: VK-API
+author: Ubivashka
 main: com.ubivashka.vk.bungee.BungeeVkApiPlugin
-version: 0.3.0
+version: ${project.version}
