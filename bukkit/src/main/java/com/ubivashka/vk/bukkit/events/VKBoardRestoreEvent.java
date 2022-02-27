@@ -8,8 +8,8 @@ public class VKBoardRestoreEvent extends VKBoardActionEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKBoardRestoreEvent(TopicComment topicComment) {
-		super(topicComment);
+	public VKBoardRestoreEvent(TopicComment topicComment, Integer groupId) {
+		super(topicComment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

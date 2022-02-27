@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.PhotoCommentDelete;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKPhotoCommentDeleteEvent extends Event {
+public class VKPhotoCommentDeleteEvent extends AbstractVkEvent {
 	private PhotoCommentDelete photoCommentDelete;
 
-	public VKPhotoCommentDeleteEvent(PhotoCommentDelete photoCommentDelete) {
+	public VKPhotoCommentDeleteEvent(PhotoCommentDelete photoCommentDelete, Integer groupId) {
+		super(groupId);
 		setPhotoCommentDelete(photoCommentDelete);
 	}
 

@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.ubivashka.vk.api.parsers.objects.MessageTyping;
 
-public class VKMessageTypingEvent extends Event {
+public class VKMessageTypingEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private MessageTyping messageTyping;
 
-	public VKMessageTypingEvent(MessageTyping message) {
-		super(true);
+	public VKMessageTypingEvent(MessageTyping message, Integer groupId) {
+		super(groupId);
 		setMessageTyping(message);
 	}
 

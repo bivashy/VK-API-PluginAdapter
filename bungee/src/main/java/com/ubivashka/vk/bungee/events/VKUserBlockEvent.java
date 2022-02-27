@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.UserBlock;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKUserBlockEvent extends Event {
+public class VKUserBlockEvent extends AbstractVkEvent {
 	private UserBlock block;
 
-	public VKUserBlockEvent(UserBlock block) {
+	public VKUserBlockEvent(UserBlock block, Integer groupId) {
+		super(groupId);
 		setBlock(block);
 	}
 

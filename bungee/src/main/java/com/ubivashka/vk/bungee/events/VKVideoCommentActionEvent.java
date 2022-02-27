@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.VideoComment;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public abstract class VKVideoCommentActionEvent extends Event {
+public abstract class VKVideoCommentActionEvent extends AbstractVkEvent {
 	private VideoComment videoComment;
 
-	public VKVideoCommentActionEvent(VideoComment videoComment) {
+	public VKVideoCommentActionEvent(VideoComment videoComment, Integer groupId) {
+		super(groupId);
 		setVideoComment(videoComment);
 	}
 

@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.audio.Audio;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKAudioNewEvent extends Event {
+public class VKAudioNewEvent extends AbstractVkEvent {
 	private Audio audio;
 
-	public VKAudioNewEvent(Audio audio) {
+	public VKAudioNewEvent(Audio audio, Integer groupId) {
+		super(groupId);
 		setAudio(audio);
 	}
 

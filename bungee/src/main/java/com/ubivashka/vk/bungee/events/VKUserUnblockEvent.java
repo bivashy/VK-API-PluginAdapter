@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.UserUnblock;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKUserUnblockEvent extends Event {
+public class VKUserUnblockEvent extends AbstractVkEvent {
 	private UserUnblock unblock;
 
-	public VKUserUnblockEvent(UserUnblock unblock) {
+	public VKUserUnblockEvent(UserUnblock unblock, Integer groupId) {
+		super(groupId);
 		setUnblock(unblock);
 	}
 

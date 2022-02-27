@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.photos.Photo;
 
-public class VKPhotoNewEvent extends Event {
+public class VKPhotoNewEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private Photo photo;
 
-	public VKPhotoNewEvent(Photo photo) {
-		super(true);
+	public VKPhotoNewEvent(Photo photo, Integer groupId) {
+		super(groupId);
 		setPhoto(photo);
 	}
 

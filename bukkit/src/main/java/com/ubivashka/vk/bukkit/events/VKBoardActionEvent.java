@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.board.TopicComment;
 
-public abstract class VKBoardActionEvent extends Event {
+public abstract class VKBoardActionEvent extends AbstractVkEvent {
 	protected TopicComment topicComment;
 
-	public VKBoardActionEvent(TopicComment topicComment) {
+	public VKBoardActionEvent(TopicComment topicComment, Integer groupId) {
+		super(groupId);
 		setTopicComment(topicComment);
 	}
 

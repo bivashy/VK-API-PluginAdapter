@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.GroupChangeSettings;
 
-public class VKGroupChangeSettingsEvent extends Event {
+public class VKGroupChangeSettingsEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private GroupChangeSettings settings;
 
-	public VKGroupChangeSettingsEvent(GroupChangeSettings settings) {
-		super(true);
+	public VKGroupChangeSettingsEvent(GroupChangeSettings settings, Integer groupId) {
+		super(groupId);
 		setSettings(settings);
 	}
 

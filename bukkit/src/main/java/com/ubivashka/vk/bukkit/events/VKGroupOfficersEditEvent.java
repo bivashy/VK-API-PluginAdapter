@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.GroupOfficersEdit;
 
-public class VKGroupOfficersEditEvent extends Event {
+public class VKGroupOfficersEditEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private GroupOfficersEdit officersEdit;
 
-	public VKGroupOfficersEditEvent(GroupOfficersEdit officersEdit) {
-		super(true);
+	public VKGroupOfficersEditEvent(GroupOfficersEdit officersEdit, Integer groupId) {
+		super(groupId);
 		setOfficersEdit(officersEdit);
 	}
 

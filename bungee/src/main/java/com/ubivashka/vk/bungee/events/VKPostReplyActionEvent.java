@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.wall.WallComment;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public abstract class VKPostReplyActionEvent extends Event {
+public abstract class VKPostReplyActionEvent extends AbstractVkEvent {
 	private WallComment postComment;
 
-	public VKPostReplyActionEvent(WallComment postComment) {
+	public VKPostReplyActionEvent(WallComment postComment, Integer groupId) {
+		super(groupId);
 		setPostComment(postComment);
 	}
 

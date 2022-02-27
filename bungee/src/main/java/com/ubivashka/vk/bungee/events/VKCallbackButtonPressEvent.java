@@ -2,20 +2,19 @@ package com.ubivashka.vk.bungee.events;
 
 import com.ubivashka.vk.api.parsers.objects.CallbackButtonEvent;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKCallbackButtonPressEvent extends Event {
+public class VKCallbackButtonPressEvent extends AbstractVkEvent {
 	private CallbackButtonEvent buttonEvent;
 
-	public VKCallbackButtonPressEvent(CallbackButtonEvent buttonEvent) {
+	public VKCallbackButtonPressEvent(CallbackButtonEvent buttonEvent, Integer groupId) {
+		super(groupId);
 		this.buttonEvent = buttonEvent;
 	}
 
-	public CallbackButtonEvent getButtonEvent() {
+	public CallbackButtonEvent getButtonEvent(CallbackButtonEvent event) {
 		return this.buttonEvent;
 	}
 
-	public void setButtonEvent(CallbackButtonEvent buttonEvent) {
+	public void setButtonEvent(CallbackButtonEvent buttonEvent, Integer groupId) {
 		this.buttonEvent = buttonEvent;
 	}
 }

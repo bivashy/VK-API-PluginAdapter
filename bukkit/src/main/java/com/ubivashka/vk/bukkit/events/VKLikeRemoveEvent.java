@@ -8,8 +8,8 @@ public class VKLikeRemoveEvent extends VKLikeUpdateEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKLikeRemoveEvent(LikeAddRemove likeAdd) {
-		super(likeAdd);
+	public VKLikeRemoveEvent(LikeAddRemove likeAdd, Integer groupId) {
+		super(likeAdd, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

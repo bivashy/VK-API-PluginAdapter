@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.VideoCommentDelete;
 
-public class VKVideoCommentDeleteEvent extends Event {
+public class VKVideoCommentDeleteEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private VideoCommentDelete videoCommentDelete;
 
-	public VKVideoCommentDeleteEvent(VideoCommentDelete videoCommentDelete) {
-		super(true);
+	public VKVideoCommentDeleteEvent(VideoCommentDelete videoCommentDelete, Integer groupId) {
+		super(groupId);
 		setVideoCommentDelete(videoCommentDelete);
 	}
 

@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.ubivashka.vk.api.parsers.objects.MessageTyping;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKMessageTypingEvent extends Event {
+public class VKMessageTypingEvent extends AbstractVkEvent {
 	private MessageTyping messageTyping;
 
-	public VKMessageTypingEvent(MessageTyping message) {
+	public VKMessageTypingEvent(MessageTyping message, Integer groupId) {
+		super(groupId);
 		setMessageTyping(message);
 	}
 

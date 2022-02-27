@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.wall.WallComment;
 
-public abstract class VKPostReplyActionEvent extends Event {
+public abstract class VKPostReplyActionEvent extends AbstractVkEvent {
 	private WallComment postComment;
 
-	public VKPostReplyActionEvent(WallComment postComment) {
+	public VKPostReplyActionEvent(WallComment postComment, Integer groupId) {
+		super(groupId);
 		setPostComment(postComment);
 	}
 

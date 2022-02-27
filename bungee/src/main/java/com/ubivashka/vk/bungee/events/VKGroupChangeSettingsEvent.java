@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.GroupChangeSettings;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKGroupChangeSettingsEvent extends Event {
+public class VKGroupChangeSettingsEvent extends AbstractVkEvent {
 	private GroupChangeSettings settings;
 
-	public VKGroupChangeSettingsEvent(GroupChangeSettings settings) {
+	public VKGroupChangeSettingsEvent(GroupChangeSettings settings, Integer groupId) {
+		super(groupId);
 		setSettings(settings);
 	}
 

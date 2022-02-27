@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.GroupChangePhoto;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKGroupChangePhotoEvent extends Event {
+public class VKGroupChangePhotoEvent extends AbstractVkEvent {
 	private GroupChangePhoto photoChange;
 
-	public VKGroupChangePhotoEvent(GroupChangePhoto photoChange) {
+	public VKGroupChangePhotoEvent(GroupChangePhoto photoChange, Integer groupId) {
+		super(groupId);
 		setPhotoChange(photoChange);
 	}
 

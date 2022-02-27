@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.callback.LikeAddRemove;
 
-public abstract class VKLikeUpdateEvent extends Event {
+public abstract class VKLikeUpdateEvent extends AbstractVkEvent {
 	protected LikeAddRemove likeAdd;
 
-	public VKLikeUpdateEvent(LikeAddRemove likeAdd) {
+	public VKLikeUpdateEvent(LikeAddRemove likeAdd, Integer groupId) {
+		super(groupId);
 		setLikeAdd(likeAdd);
 	}
 

@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.wall.Wallpost;
 
-public class VKPostRepostEvent extends Event {
+public class VKPostRepostEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private Wallpost post;
 
-	public VKPostRepostEvent(Wallpost post) {
-		super(true);
+	public VKPostRepostEvent(Wallpost post, Integer groupId) {
+		super(groupId);
 		setPost(post);
 	}
 

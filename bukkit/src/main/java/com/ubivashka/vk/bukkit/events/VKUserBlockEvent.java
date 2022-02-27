@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.UserBlock;
 
-public class VKUserBlockEvent extends Event {
+public class VKUserBlockEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private UserBlock block;
 
-	public VKUserBlockEvent(UserBlock block) {
-		super(true);
+	public VKUserBlockEvent(UserBlock block, Integer groupId) {
+		super(groupId);
 		setBlock(block);
 	}
 

@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.MarketCommentDelete;
 
-public class VKMarketCommentDeleteEvent extends Event {
+public class VKMarketCommentDeleteEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private MarketCommentDelete comment;
 
-	public VKMarketCommentDeleteEvent(MarketCommentDelete comment) {
-		super(true);
+	public VKMarketCommentDeleteEvent(MarketCommentDelete comment, Integer groupId) {
+		super(groupId);
 		setComment(comment);
 	}
 

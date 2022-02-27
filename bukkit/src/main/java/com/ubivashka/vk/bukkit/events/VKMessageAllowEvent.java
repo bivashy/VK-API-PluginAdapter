@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.MessageAllow;
 
-public class VKMessageAllowEvent extends Event {
+public class VKMessageAllowEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private MessageAllow messageAllow;
 
-	public VKMessageAllowEvent(MessageAllow messageAllow) {
-		super(true);
+	public VKMessageAllowEvent(MessageAllow messageAllow, Integer groupId) {
+		super(groupId);
 		this.setMessageAllow(messageAllow);
 	}
 

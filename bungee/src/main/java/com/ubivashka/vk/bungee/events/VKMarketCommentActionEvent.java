@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.MarketComment;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public abstract class VKMarketCommentActionEvent extends Event {
+public abstract class VKMarketCommentActionEvent extends AbstractVkEvent {
 	private MarketComment comment;
 
-	public VKMarketCommentActionEvent(MarketComment comment) {
+	public VKMarketCommentActionEvent(MarketComment comment, Integer groupId) {
+		super(groupId);
 		setComment(comment);
 	}
 

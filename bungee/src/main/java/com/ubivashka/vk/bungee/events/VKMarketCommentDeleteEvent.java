@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.MarketCommentDelete;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKMarketCommentDeleteEvent extends Event {
+public class VKMarketCommentDeleteEvent extends AbstractVkEvent {
 	private MarketCommentDelete comment;
 
-	public VKMarketCommentDeleteEvent(MarketCommentDelete comment) {
+	public VKMarketCommentDeleteEvent(MarketCommentDelete comment, Integer groupId) {
+		super(groupId);
 		setComment(comment);
 	}
 

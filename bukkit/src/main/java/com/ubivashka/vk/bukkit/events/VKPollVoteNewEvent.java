@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.PollVoteNew;
 
-public class VKPollVoteNewEvent extends Event {
+public class VKPollVoteNewEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private PollVoteNew pollVote;
 
-	public VKPollVoteNewEvent(PollVoteNew pollVote) {
-		super(true);
+	public VKPollVoteNewEvent(PollVoteNew pollVote, Integer groupId) {
+		super(groupId);
 		setPollVote(pollVote);
 	}
 

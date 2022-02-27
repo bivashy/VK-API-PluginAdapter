@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.audio.Audio;
 
-public class VKAudioNewEvent extends Event {
+public class VKAudioNewEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private Audio audio;
 
-	public VKAudioNewEvent(Audio audio) {
-		super(true);
+	public VKAudioNewEvent(Audio audio, Integer groupId) {
+		super(groupId);
 		setAudio(audio);
 	}
 

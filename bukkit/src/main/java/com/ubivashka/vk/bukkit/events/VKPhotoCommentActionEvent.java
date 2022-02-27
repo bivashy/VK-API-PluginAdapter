@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.callback.PhotoComment;
 
-public abstract class VKPhotoCommentActionEvent extends Event {
+public abstract class VKPhotoCommentActionEvent extends AbstractVkEvent {
 	protected PhotoComment photoComment;
 
-	public VKPhotoCommentActionEvent(PhotoComment photoComment) {
+	public VKPhotoCommentActionEvent(PhotoComment photoComment, Integer groupId) {
+		super(groupId);
 		setPhotoComment(photoComment);
 	}
 

@@ -1,16 +1,16 @@
 package com.ubivashka.vk.bukkit.events;
 
 import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 
 import com.vk.api.sdk.objects.messages.Message;
 
-public abstract class VKMessageUpdateEvent extends Event implements Cancellable {
+public abstract class VKMessageUpdateEvent extends AbstractVkEvent implements Cancellable {
 	private boolean cancel = false;
 
 	private Message message;
 
-	public VKMessageUpdateEvent(Message message) {
+	public VKMessageUpdateEvent(Message message, Integer groupId) {
+		super(groupId);
 		setMessage(message);
 	}
 

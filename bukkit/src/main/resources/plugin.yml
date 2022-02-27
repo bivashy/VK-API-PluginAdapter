@@ -1,4 +1,4 @@
 name: VK-API
 author: Ubivashka
 main: com.ubivashka.vk.bukkit.BukkitVkApiPlugin
-version: 0.3.0
+version: ${project.version}

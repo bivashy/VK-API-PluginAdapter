@@ -7,8 +7,8 @@ import com.vk.api.sdk.objects.callback.MarketComment;
 public class VKMarketCommentEditEvent extends VKMarketCommentActionEvent {
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKMarketCommentEditEvent(MarketComment comment) {
-		super(comment);
+	public VKMarketCommentEditEvent(MarketComment comment, Integer groupId) {
+		super(comment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

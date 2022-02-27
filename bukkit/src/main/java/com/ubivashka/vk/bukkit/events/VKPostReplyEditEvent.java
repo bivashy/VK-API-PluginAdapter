@@ -7,8 +7,8 @@ import com.vk.api.sdk.objects.wall.WallComment;
 public class VKPostReplyEditEvent extends VKPostReplyActionEvent {
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKPostReplyEditEvent(WallComment postComment) {
-		super(postComment);
+	public VKPostReplyEditEvent(WallComment postComment, Integer groupId) {
+		super(postComment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

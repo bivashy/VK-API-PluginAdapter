@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.LikeAddRemove;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public abstract class VKLikeUpdateEvent extends Event {
+public abstract class VKLikeUpdateEvent extends AbstractVkEvent {
 	protected LikeAddRemove likeAdd;
 
-	public VKLikeUpdateEvent(LikeAddRemove likeAdd) {
+	public VKLikeUpdateEvent(LikeAddRemove likeAdd, Integer groupId) {
+		super(groupId);
 		setLikeAdd(likeAdd);
 	}
 

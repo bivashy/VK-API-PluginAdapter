@@ -3,14 +3,14 @@ package com.ubivashka.vk.bungee.events;
 import com.vk.api.sdk.objects.messages.Message;
 
 import net.md_5.bungee.api.plugin.Cancellable;
-import net.md_5.bungee.api.plugin.Event;
 
-public abstract class VKMessageUpdateEvent extends Event implements Cancellable {
+public abstract class VKMessageUpdateEvent extends AbstractVkEvent implements Cancellable {
 	private boolean cancel = false;
 
 	private Message message;
 
-	public VKMessageUpdateEvent(Message message) {
+	public VKMessageUpdateEvent(Message message, Integer groupId) {
+		super(groupId);
 		setMessage(message);
 	}
 

@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.WallCommentDelete;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKPostReplyDeleteEvent extends Event {
+public class VKPostReplyDeleteEvent extends AbstractVkEvent {
 	private WallCommentDelete postCommentDelete;
 
-	public VKPostReplyDeleteEvent(WallCommentDelete postCommentDelete) {
+	public VKPostReplyDeleteEvent(WallCommentDelete postCommentDelete, Integer groupId) {
+		super(groupId);
 		setPostCommentDelete(postCommentDelete);
 	}
 

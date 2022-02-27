@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.MessageAllow;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKMessageAllowEvent extends Event {
+public class VKMessageAllowEvent extends AbstractVkEvent {
 	private MessageAllow messageAllow;
 
-	public VKMessageAllowEvent(MessageAllow messageAllow) {
+	public VKMessageAllowEvent(MessageAllow messageAllow, Integer groupId) {
+		super(groupId);
 		setMessageAllow(messageAllow);
 	}
 

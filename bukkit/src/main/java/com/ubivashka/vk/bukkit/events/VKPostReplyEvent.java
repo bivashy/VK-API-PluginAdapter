@@ -8,8 +8,8 @@ public class VKPostReplyEvent extends VKPostReplyActionEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKPostReplyEvent(WallComment postComment) {
-		super(postComment);
+	public VKPostReplyEvent(WallComment postComment, Integer groupId) {
+		super(postComment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

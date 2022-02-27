@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.google.gson.JsonObject;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKJsonEvent extends Event {
+public class VKJsonEvent extends AbstractVkEvent {
 	private JsonObject jsonObject;
 
-	public VKJsonEvent(JsonObject jsonObject) {
+	public VKJsonEvent(JsonObject jsonObject, Integer groupId) {
+		super(groupId);
 		setJsonObject(jsonObject);
 	}
 

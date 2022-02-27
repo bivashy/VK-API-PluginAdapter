@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.callback.VideoComment;
 
-public abstract class VKVideoCommentActionEvent extends Event {
+public abstract class VKVideoCommentActionEvent extends AbstractVkEvent {
 	private VideoComment videoComment;
 
-	public VKVideoCommentActionEvent(VideoComment videoComment) {
+	public VKVideoCommentActionEvent(VideoComment videoComment, Integer groupId) {
+		super(groupId);
 		setVideoComment(videoComment);
 	}
 

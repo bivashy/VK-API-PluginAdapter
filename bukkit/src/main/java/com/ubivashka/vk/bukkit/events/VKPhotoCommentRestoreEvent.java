@@ -8,8 +8,8 @@ public class VKPhotoCommentRestoreEvent extends VKPhotoCommentActionEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKPhotoCommentRestoreEvent(PhotoComment photoComment) {
-		super(photoComment);
+	public VKPhotoCommentRestoreEvent(PhotoComment photoComment, Integer groupId) {
+		super(photoComment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.BoardPostDelete;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKBoardDeleteEvent extends Event {
+public class VKBoardDeleteEvent extends AbstractVkEvent {
 	private BoardPostDelete boardDelete;
 
-	public VKBoardDeleteEvent(BoardPostDelete boardDelete) {
+	public VKBoardDeleteEvent(BoardPostDelete boardDelete, Integer groupId) {
+		super(groupId);
 		setBoardDelete(boardDelete);
 	}
 

@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.video.Video;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKVideoNewEvent extends Event {
+public class VKVideoNewEvent extends AbstractVkEvent {
 	private Video video;
 
-	public VKVideoNewEvent(Video video) {
+	public VKVideoNewEvent(Video video, Integer groupId) {
+		super(groupId);
 		setVideo(video);
 	}
 

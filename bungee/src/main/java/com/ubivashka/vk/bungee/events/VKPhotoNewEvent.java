@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.photos.Photo;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKPhotoNewEvent extends Event {
+public class VKPhotoNewEvent extends AbstractVkEvent {
 	private Photo photo;
 
-	public VKPhotoNewEvent(Photo photo) {
+	public VKPhotoNewEvent(Photo photo, Integer groupId) {
+		super(groupId);
 		setPhoto(photo);
 	}
 

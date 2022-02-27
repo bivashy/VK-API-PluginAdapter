@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.PhotoComment;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public abstract class VKPhotoCommentActionEvent extends Event {
+public abstract class VKPhotoCommentActionEvent extends AbstractVkEvent {
 	protected PhotoComment photoComment;
 
-	public VKPhotoCommentActionEvent(PhotoComment photoComment) {
+	public VKPhotoCommentActionEvent(PhotoComment photoComment, Integer groupId) {
+		super(groupId);
 		setPhotoComment(photoComment);
 	}
 

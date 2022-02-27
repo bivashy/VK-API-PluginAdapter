@@ -8,8 +8,8 @@ public class VKBoardNewEvent extends VKBoardActionEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKBoardNewEvent(TopicComment topicComment) {
-		super(topicComment);
+	public VKBoardNewEvent(TopicComment topicComment, Integer groupId) {
+		super(topicComment, groupId);
 	}
 
 	public static HandlerList getHandlerList() {

@@ -7,7 +7,7 @@ import com.vk.api.sdk.objects.messages.Message;
 public class VKMessageEditEvent extends VKMessageUpdateEvent {
 	private static final HandlerList handlers = new HandlerList();
 
-	public VKMessageEditEvent(Message message) {
+	public VKMessageEditEvent(Message message, Integer groupId) {
 		super(message);
 	}
 

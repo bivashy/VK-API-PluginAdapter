@@ -1,13 +1,12 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
-
 import com.vk.api.sdk.objects.callback.MarketComment;
 
-public abstract class VKMarketCommentActionEvent extends Event {
+public abstract class VKMarketCommentActionEvent extends AbstractVkEvent {
 	private MarketComment comment;
 
-	public VKMarketCommentActionEvent(MarketComment comment) {
+	public VKMarketCommentActionEvent(MarketComment comment, Integer groupId) {
+		super(groupId);
 		setComment(comment);
 	}
 

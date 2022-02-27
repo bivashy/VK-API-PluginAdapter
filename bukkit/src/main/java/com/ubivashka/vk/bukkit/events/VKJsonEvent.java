@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.google.gson.JsonObject;
 
-public class VKJsonEvent extends Event {
+public class VKJsonEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private JsonObject jsonObject;
 
-	public VKJsonEvent(JsonObject jsonObject) {
-		super(true);
+	public VKJsonEvent(JsonObject jsonObject, Integer groupId) {
+		super(groupId);
 		setJsonObject(jsonObject);
 	}
 

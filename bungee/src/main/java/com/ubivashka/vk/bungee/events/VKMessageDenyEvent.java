@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.MessageDeny;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKMessageDenyEvent extends Event {
+public class VKMessageDenyEvent extends AbstractVkEvent {
 	private MessageDeny messageDeny;
 
-	public VKMessageDenyEvent(MessageDeny messageAllow) {
+	public VKMessageDenyEvent(MessageDeny messageAllow, Integer groupId) {
+		super(groupId);
 		setMessageDeny(messageAllow);
 	}
 

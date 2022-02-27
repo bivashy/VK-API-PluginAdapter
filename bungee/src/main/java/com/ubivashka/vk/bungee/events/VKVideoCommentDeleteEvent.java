@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.callback.VideoCommentDelete;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKVideoCommentDeleteEvent extends Event {
+public class VKVideoCommentDeleteEvent extends AbstractVkEvent {
 	private VideoCommentDelete videoCommentDelete;
 
-	public VKVideoCommentDeleteEvent(VideoCommentDelete videoCommentDelete) {
+	public VKVideoCommentDeleteEvent(VideoCommentDelete videoCommentDelete, Integer groupId) {
+		super(groupId);
 		setVideoCommentDelete(videoCommentDelete);
 	}
 

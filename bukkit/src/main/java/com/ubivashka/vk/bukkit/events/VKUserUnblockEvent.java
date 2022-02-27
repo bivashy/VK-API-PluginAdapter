@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.UserUnblock;
 
-public class VKUserUnblockEvent extends Event {
+public class VKUserUnblockEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private UserUnblock unblock;
 
-	public VKUserUnblockEvent(UserUnblock unblock) {
-		super(true);
+	public VKUserUnblockEvent(UserUnblock unblock, Integer groupId) {
+		super(groupId);
 		setUnblock(unblock);
 	}
 

@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.video.Video;
 
-public class VKVideoNewEvent extends Event {
+public class VKVideoNewEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private Video video;
 
-	public VKVideoNewEvent(Video video) {
-		super(true);
+	public VKVideoNewEvent(Video video, Integer groupId) {
+		super(groupId);
 		setVideo(video);
 	}
 

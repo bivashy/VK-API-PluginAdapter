@@ -1,16 +1,15 @@
 package com.ubivashka.vk.bukkit.events;
 
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.vk.api.sdk.objects.callback.BoardPostDelete;
 
-public class VKBoardDeleteEvent extends Event {
+public class VKBoardDeleteEvent extends AbstractVkEvent {
 	private static final HandlerList handlers = new HandlerList();
 	private BoardPostDelete boardDelete;
 
-	public VKBoardDeleteEvent(BoardPostDelete boardDelete) {
-		super(true);
+	public VKBoardDeleteEvent(BoardPostDelete boardDelete, Integer groupId) {
+		super(groupId);
 		setBoardDelete(boardDelete);
 	}
 

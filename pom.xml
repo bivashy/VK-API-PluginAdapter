@@ -32,10 +32,17 @@
 		<module>core</module>
 		<module>bukkit</module>
 		<module>bungee</module>
+		<module>velocity</module>
 	</modules>
 
 	<build>
 		<finalName>${project.file.name}</finalName>
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- Maven compiler plugin -->
 			<plugin>

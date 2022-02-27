@@ -2,12 +2,11 @@ package com.ubivashka.vk.bungee.events;
 
 import com.vk.api.sdk.objects.wall.Wallpost;
 
-import net.md_5.bungee.api.plugin.Event;
-
-public class VKPostRepostEvent extends Event {
+public class VKPostRepostEvent extends AbstractVkEvent {
 	private Wallpost post;
 
-	public VKPostRepostEvent(Wallpost post) {
+	public VKPostRepostEvent(Wallpost post, Integer groupId) {
+		super(groupId);
 		setPost(post);
 	}
 
