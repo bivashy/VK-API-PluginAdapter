@@ -14,3 +14,7 @@
 /core/.classpath
 /core/target
 /core/.settings
+/velocity/.settings
+/velocity/.classpath
+/velocity/.project
+/velocity/target

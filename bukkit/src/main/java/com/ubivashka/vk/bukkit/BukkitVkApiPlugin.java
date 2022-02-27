@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.ubivashka.vk.api.VkApiPlugin;
 import com.ubivashka.vk.api.config.PluginConfig;
+import com.ubivashka.vk.api.listeners.LongpoolAPIListener;
 import com.ubivashka.vk.api.parsers.LongpoolEventParser;
 import com.ubivashka.vk.api.providers.VkApiProvider;
 import com.ubivashka.vk.bukkit.config.BukkitPluginConfig;
@@ -31,6 +32,8 @@ public class BukkitVkApiPlugin extends JavaPlugin implements VkApiPlugin<Event, 
 		pluginConfig = new BukkitPluginConfig(this);
 		vkApiProvider = new BukkitVkApiProvider(pluginConfig);
 
+		new LongpoolAPIListener<>(this);
+
 		Bukkit.getConsoleSender()
 				.sendMessage("\n\r" + ChatColor.BLUE + " ##      ## ##   ##           ##     #######  ##\r\n"
 						+ ChatColor.BLUE + "/##     /##/##  ##           ####   /##////##/##\r\n" + ChatColor.BLUE
@@ -43,16 +46,19 @@ public class BukkitVkApiPlugin extends JavaPlugin implements VkApiPlugin<Event, 
 
 	}
 
+	@Deprecated
 	@Override
 	public GroupActor getActor() {
 		return vkApiProvider.getActor();
 	}
 
+	@Deprecated
 	@Override
 	public VkApiClient getVK() {
 		return vkApiProvider.getVkApiClient();
 	}
 
+	@Deprecated
 	@Override
 	public LongpoolEventParser getLongpoolParser() {
 		return vkApiProvider.getLongpoolParser();

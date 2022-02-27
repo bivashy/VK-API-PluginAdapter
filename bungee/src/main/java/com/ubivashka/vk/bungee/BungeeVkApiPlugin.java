@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import com.ubivashka.vk.api.VkApiPlugin;
 import com.ubivashka.vk.api.config.PluginConfig;
+import com.ubivashka.vk.api.listeners.LongpoolAPIListener;
 import com.ubivashka.vk.api.parsers.LongpoolEventParser;
 import com.ubivashka.vk.api.providers.VkApiProvider;
 import com.ubivashka.vk.bungee.config.BungeePluginConfig;
@@ -32,6 +33,8 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin<Event, Conf
 		pluginConfig = new BungeePluginConfig(this);
 		vkApiProvider = new BungeeVkApiProvider(pluginConfig);
 
+		new LongpoolAPIListener<>(this);
+
 		System.out.println("\r\n\r\n" + ChatColor.DARK_AQUA
 				+ "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
 						ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
@@ -48,16 +51,19 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin<Event, Conf
 
 	}
 
+	@Deprecated
 	@Override
 	public GroupActor getActor() {
 		return vkApiProvider.getActor();
 	}
 
+	@Deprecated
 	@Override
 	public VkApiClient getVK() {
 		return vkApiProvider.getVkApiClient();
 	}
 
+	@Deprecated
 	@Override
 	public LongpoolEventParser getLongpoolParser() {
 		return vkApiProvider.getLongpoolParser();

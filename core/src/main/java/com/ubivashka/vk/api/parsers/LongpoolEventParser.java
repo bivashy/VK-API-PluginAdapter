@@ -3,8 +3,6 @@ package com.ubivashka.vk.api.parsers;
 import com.google.gson.JsonObject;
 import com.ubivashka.vk.api.parsers.objects.CallbackButtonEvent;
 import com.ubivashka.vk.api.parsers.objects.MessageTyping;
-import com.ubivashka.vk.bungee.events.VKMessageEvent;
-import com.ubivashka.vk.bungee.events.VKMessageReplyEvent;
 import com.vk.api.sdk.objects.audio.Audio;
 import com.vk.api.sdk.objects.board.TopicComment;
 import com.vk.api.sdk.objects.callback.BoardPostDelete;

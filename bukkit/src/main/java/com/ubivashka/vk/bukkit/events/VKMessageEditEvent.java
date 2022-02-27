@@ -8,7 +8,7 @@ public class VKMessageEditEvent extends VKMessageUpdateEvent {
 	private static final HandlerList handlers = new HandlerList();
 
 	public VKMessageEditEvent(Message message, Integer groupId) {
-		super(message);
+		super(message,groupId);
 	}
 
 	public static HandlerList getHandlerList() {

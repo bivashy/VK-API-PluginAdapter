@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.ubivashka</groupId>
+		<artifactId>vk-api.parent</artifactId>
+		<version>0.3.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>vk-api.velocity</artifactId>
+	<packaging>jar</packaging>
+
+	<properties>
+		<project.file.name>VK-API-Velocity</project.file.name>
+
+		<!-- Dependencies -->
+		<velocity-api.vesion>3.0.1</velocity-api.vesion>
+		<yaml.configuration.api>1.7.3</yaml.configuration.api>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+		<repository>
+			<id>velocity</id>
+			<url>https://repo.velocitypowered.com/snapshots/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<!-- Core -->
+		<dependency>
+			<groupId>com.ubivashka</groupId>
+			<artifactId>vk-api.core</artifactId>
+			<version>${core.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Velocity API -->
+		<dependency>
+			<groupId>com.velocitypowered</groupId>
+			<artifactId>velocity-api</artifactId>
+			<version>${velocity-api.vesion}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>
