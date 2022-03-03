@@ -10,6 +10,7 @@ public abstract class AbstractVkEvent extends Event implements VkGroupEvent {
 	private final Integer groupId;
 
 	public AbstractVkEvent(Integer groupId) {
+		super(true);
 		this.groupId = groupId;
 	}
 
