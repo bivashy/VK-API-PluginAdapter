@@ -10,7 +10,7 @@ public class VKCallbackButtonPressEvent extends AbstractVkEvent {
 		this.buttonEvent = buttonEvent;
 	}
 
-	public CallbackButtonEvent getButtonEvent(CallbackButtonEvent event) {
+	public CallbackButtonEvent getButtonEvent() {
 		return this.buttonEvent;
 	}
 
