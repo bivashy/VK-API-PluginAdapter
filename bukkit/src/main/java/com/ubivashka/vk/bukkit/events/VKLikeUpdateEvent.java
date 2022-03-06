@@ -3,18 +3,18 @@ package com.ubivashka.vk.bukkit.events;
 import com.vk.api.sdk.objects.callback.LikeAddRemove;
 
 public abstract class VKLikeUpdateEvent extends AbstractVkEvent {
-	protected LikeAddRemove likeAdd;
+	protected LikeAddRemove likeInfo;
 
-	public VKLikeUpdateEvent(LikeAddRemove likeAdd, Integer groupId) {
+	public VKLikeUpdateEvent(LikeAddRemove likeInfo, Integer groupId) {
 		super(groupId);
-		setLikeAdd(likeAdd);
+		setLikeInfo(likeInfo);
 	}
 
-	public LikeAddRemove getLikeAdd() {
-		return this.likeAdd;
+	public LikeAddRemove getLikeInfo() {
+		return this.likeInfo;
 	}
 
-	public void setLikeAdd(LikeAddRemove likeAdd) {
-		this.likeAdd = likeAdd;
+	public void setLikeInfo(LikeAddRemove likeInfo) {
+		this.likeInfo = likeInfo;
 	}
 }
