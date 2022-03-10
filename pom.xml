@@ -6,7 +6,7 @@
 
 	<groupId>com.ubivashka</groupId>
 	<artifactId>vk-api.parent</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -20,7 +20,7 @@
 		<java.version>8</java.version>
 
 		<!-- Dependencies -->
-		<core.version>0.3.0</core.version>
+		<core.version>0.3.1</core.version>
 
 		<!-- Maven plugins -->
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
