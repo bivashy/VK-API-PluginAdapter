@@ -15,7 +15,6 @@
 
 		<!-- Dependencies -->
 		<velocity-api.vesion>3.0.1</velocity-api.vesion>
-		<yaml.configuration.api>1.7.3</yaml.configuration.api>
 	</properties>
 
 	<repositories>
