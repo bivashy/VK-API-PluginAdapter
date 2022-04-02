@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -91,6 +92,14 @@ public abstract class AbstractLongpoolEventParser implements LongpoolEventParser
 	private static final String CALLBACK_EVENT_CONFIRMATION = "confirmation";
 	private static final Map<String, Type> CALLBACK_TYPES;
 
+	static {
+		Objects.requireNonNull(org.apache.commons.logging.impl.LogFactoryImpl.class);
+		Objects.requireNonNull(org.apache.commons.logging.impl.Log4JLogger.class);
+		Objects.requireNonNull(org.apache.commons.logging.impl.Jdk14Logger.class);
+		Objects.requireNonNull(org.apache.commons.logging.impl.Jdk13LumberjackLogger.class);
+		Objects.requireNonNull(org.apache.commons.logging.impl.SimpleLog.class);
+	}
+	
 	static {
 		Map<String, Type> types = new HashMap<>();
 		types.put(CALLBACK_EVENT_MESSAGE_NEW, new TypeToken<CallbackMessage<Message>>() {
