@@ -24,7 +24,7 @@ import com.vk.api.sdk.client.actors.GroupActor;
 
 import ninja.leaping.configurate.ConfigurationNode;
 
-@Plugin(id = "vk-api", name = "VK-API", version = "0.3.0", authors = "Ubivashka")
+@Plugin(id = "vk-api", name = "VK-API", version = "0.3.2", authors = "Ubivashka")
 public class VelocityVkApiPlugin implements VkApiPlugin<VkGroupEvent, ConfigurationNode> {
 
 	private static VelocityVkApiPlugin instance;
