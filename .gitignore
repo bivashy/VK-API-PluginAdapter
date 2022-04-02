@@ -22,3 +22,7 @@
 /examples/target
 /examples/.classpath
 /examples/.project
+/core/dependency-reduced-pom.xml
+/velocity/dependency-reduced-pom.xml
+/bungee/dependency-reduced-pom.xml
+/bukkit/dependency-reduced-pom.xml
