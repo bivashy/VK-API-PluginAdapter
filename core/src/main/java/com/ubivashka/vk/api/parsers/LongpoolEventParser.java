@@ -31,93 +31,93 @@ import com.vk.api.sdk.objects.wall.WallComment;
 import com.vk.api.sdk.objects.wall.Wallpost;
 
 public interface LongpoolEventParser {
-	public void messageNew(Integer groupId, String secret, Message message);
+	void messageNew(Integer groupId, String secret, Message message);
 
-	public void messageReply(Integer groupId, String secret, Message message);
+	void messageReply(Integer groupId, String secret, Message message);
 
-	public void messageEdit(Integer groupId, String secret, Message messageEdit);
+	void messageEdit(Integer groupId, String secret, Message messageEdit);
 
-	public void messageAllow(Integer groupId, String secret, MessageAllow messageAllow);
+	void messageAllow(Integer groupId, String secret, MessageAllow messageAllow);
 
-	public void messageDeny(Integer groupId, String secret, MessageDeny messageDeny);
+	void messageDeny(Integer groupId, String secret, MessageDeny messageDeny);
 
-	public void messageTyping(Integer groupId, String secret, MessageTyping messageTyping);
+	void messageTyping(Integer groupId, String secret, MessageTyping messageTyping);
 
-	public void messageEvent(Integer groupId, String secret, CallbackButtonEvent buttonEvent);
+	void messageEvent(Integer groupId, String secret, CallbackButtonEvent buttonEvent);
 
-	public void photoNew(Integer groupId, String secret, Photo photo);
+	void photoNew(Integer groupId, String secret, Photo photo);
 
-	public void photoCommentNew(Integer groupId, String secret, PhotoComment comment);
+	void photoCommentNew(Integer groupId, String secret, PhotoComment comment);
 
-	public void photoCommentEdit(Integer groupId, String secret, PhotoComment comment);
+	void photoCommentEdit(Integer groupId, String secret, PhotoComment comment);
 
-	public void photoCommentRestore(Integer groupId, String secret, PhotoComment comment);
+	void photoCommentRestore(Integer groupId, String secret, PhotoComment comment);
 
-	public void photoCommentDelete(Integer groupId, String secret, PhotoCommentDelete commentDelete);
+	void photoCommentDelete(Integer groupId, String secret, PhotoCommentDelete commentDelete);
 
-	public void audioNew(Integer groupId, String secret, Audio audio);
+	void audioNew(Integer groupId, String secret, Audio audio);
 
-	public void videoNew(Integer groupId, String secret, Video video);
+	void videoNew(Integer groupId, String secret, Video video);
 
-	public void videoCommentNew(Integer groupId, String secret, VideoComment videoComment);
+	void videoCommentNew(Integer groupId, String secret, VideoComment videoComment);
 
-	public void videoCommentEdit(Integer groupId, String secret, VideoComment videoComment);
+	void videoCommentEdit(Integer groupId, String secret, VideoComment videoComment);
 
-	public void videoCommentRestore(Integer groupId, String secret, VideoComment videoComment);
+	void videoCommentRestore(Integer groupId, String secret, VideoComment videoComment);
 
-	public void videoCommentDelete(Integer groupId, String secret, VideoCommentDelete videoCommentDelete);
+	void videoCommentDelete(Integer groupId, String secret, VideoCommentDelete videoCommentDelete);
 
-	public void wallPostNew(Integer groupId, String secret, Wallpost post);
+	void wallPostNew(Integer groupId, String secret, Wallpost post);
 
-	public void wallRepost(Integer groupId, String secret, Wallpost post);
+	void wallRepost(Integer groupId, String secret, Wallpost post);
 
-	public void wallReplyNew(Integer groupId, String secret, WallComment postComment);
+	void wallReplyNew(Integer groupId, String secret, WallComment postComment);
 
-	public void wallReplyEdit(Integer groupId, String secret, WallComment postComment);
+	void wallReplyEdit(Integer groupId, String secret, WallComment postComment);
 
-	public void wallReplyRestore(Integer groupId, String secret, WallComment postComment);
+	void wallReplyRestore(Integer groupId, String secret, WallComment postComment);
 
-	public void wallReplyDelete(Integer groupId, String secret, WallCommentDelete postCommentDelete);
+	void wallReplyDelete(Integer groupId, String secret, WallCommentDelete postCommentDelete);
 
-	public void likeAdd(Integer groupId, String secret, LikeAddRemove likeAdd);
+	void likeAdd(Integer groupId, String secret, LikeAddRemove likeAdd);
 
-	public void likeRemove(Integer groupId, String secret, LikeAddRemove likeRemove);
+	void likeRemove(Integer groupId, String secret, LikeAddRemove likeRemove);
 
-	public void boardPostNew(Integer groupId, String secret, TopicComment topicComment);
+	void boardPostNew(Integer groupId, String secret, TopicComment topicComment);
 
-	public void boardPostEdit(Integer groupId, String secret, TopicComment topicComment);
+	void boardPostEdit(Integer groupId, String secret, TopicComment topicComment);
 
-	public void boardPostRestore(Integer groupId, String secret, TopicComment topicComment);
+	void boardPostRestore(Integer groupId, String secret, TopicComment topicComment);
 
-	public void boardPostDelete(Integer groupId, String secret, BoardPostDelete boardDelete);
+	void boardPostDelete(Integer groupId, String secret, BoardPostDelete boardDelete);
 
-	public void marketCommentNew(Integer groupId, String secret, MarketComment comment);
+	void marketCommentNew(Integer groupId, String secret, MarketComment comment);
 
-	public void marketCommentEdit(Integer groupId, String secret, MarketComment comment);
+	void marketCommentEdit(Integer groupId, String secret, MarketComment comment);
 
-	public void marketCommentRestore(Integer groupId, String secret, MarketComment comment);
+	void marketCommentRestore(Integer groupId, String secret, MarketComment comment);
 
-	public void marketCommentDelete(Integer groupId, String secret, MarketCommentDelete commentDelete);
+	void marketCommentDelete(Integer groupId, String secret, MarketCommentDelete commentDelete);
 
-	public void groupLeave(Integer groupId, String secret, GroupLeave groupLeave);
+	void groupLeave(Integer groupId, String secret, GroupLeave groupLeave);
 
-	public void groupJoin(Integer groupId, String secret, GroupJoin groupJoin);
+	void groupJoin(Integer groupId, String secret, GroupJoin groupJoin);
 
-	public void groupChangeSettings(Integer groupId, String secret, GroupChangeSettings changeSettings);
+	void groupChangeSettings(Integer groupId, String secret, GroupChangeSettings changeSettings);
 
-	public void groupChangePhoto(Integer groupId, String secret, GroupChangePhoto changePhoto);
+	void groupChangePhoto(Integer groupId, String secret, GroupChangePhoto changePhoto);
 
-	public void groupOfficersEdit(Integer groupId, String secret, GroupOfficersEdit officersEdit);
+	void groupOfficersEdit(Integer groupId, String secret, GroupOfficersEdit officersEdit);
 
-	public void pollVoteNew(Integer groupId, String secret, PollVoteNew vote);
+	void pollVoteNew(Integer groupId, String secret, PollVoteNew vote);
 
-	public void userBlock(Integer groupId, String secret, UserBlock block);
+	void userBlock(Integer groupId, String secret, UserBlock block);
 
-	public void userUnblock(Integer groupId, String secret, UserUnblock unblock);
+	void userUnblock(Integer groupId, String secret, UserUnblock unblock);
 
-	public void confirmation(Integer groupId, String secret);
+	void confirmation(Integer groupId, String secret);
 
-	public void jsonEvent(Integer groupId, String secret, JsonObject json);
+	void jsonEvent(Integer groupId, String secret, JsonObject json);
 
 	boolean parse(String json);
 
