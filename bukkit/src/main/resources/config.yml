@@ -1,5 +1,5 @@
 groupInfo:
-  groupID: 123456789 #Сюда ваш ID группы
+  groupID: -1 #Сюда ваш ID группы (Опционально, можете не указывать)
   groupToken: 'yourTokenHere'
 settings:
   delay: 15 #ВНИМАНИЕ! Не ставьте слишком низкие числа ( не ниже 10)

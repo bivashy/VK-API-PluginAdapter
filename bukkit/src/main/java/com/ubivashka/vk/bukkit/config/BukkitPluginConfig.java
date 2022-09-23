@@ -7,36 +7,36 @@ import com.ubivashka.vk.bukkit.BukkitVkApiPlugin;
 
 public class BukkitPluginConfig implements PluginConfig {
 
-	private ConfigurationSection configuration;
-	private Integer longpoolSchedulerDelay, groupId;
-	private String groupToken;
+    private ConfigurationSection configuration;
+    private Integer longpoolSchedulerDelay, groupId;
+    private String groupToken;
 
-	public BukkitPluginConfig(BukkitVkApiPlugin plugin) {
-		plugin.saveDefaultConfig();
-		configuration = plugin.getConfig();
-		longpoolSchedulerDelay = configuration.getInt("settings.delay");
-		groupId = configuration.getInt("groupInfo.groupID");
-		groupToken = configuration.getString("groupInfo.groupToken");
-	}
+    public BukkitPluginConfig(BukkitVkApiPlugin plugin) {
+        plugin.saveDefaultConfig();
+        configuration = plugin.getConfig();
+        longpoolSchedulerDelay = configuration.getInt("settings.delay");
+        groupId = configuration.getInt("groupInfo.groupID", -1);
+        groupToken = configuration.getString("groupInfo.groupToken");
+    }
 
-	@Override
-	public Integer getLongpoolSchedulerDelay() {
-		return longpoolSchedulerDelay;
-	}
+    @Override
+    public Integer getLongpoolSchedulerDelay() {
+        return longpoolSchedulerDelay;
+    }
 
-	@Override
-	public Integer getGroupId() {
-		return groupId;
-	}
+    @Override
+    public Integer getGroupId() {
+        return groupId;
+    }
 
-	@Override
-	public String getGroupToken() {
-		return groupToken;
-	}
+    @Override
+    public String getGroupToken() {
+        return groupToken;
+    }
 
-	@Override
-	public Object getConfiguration() {
-		return configuration;
-	}
+    @Override
+    public Object getConfiguration() {
+        return configuration;
+    }
 
 }

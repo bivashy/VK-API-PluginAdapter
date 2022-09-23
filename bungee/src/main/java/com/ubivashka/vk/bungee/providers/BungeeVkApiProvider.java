@@ -1,52 +1,27 @@
 package com.ubivashka.vk.bungee.providers;
 
 import com.ubivashka.vk.api.config.PluginConfig;
-import com.ubivashka.vk.api.parsers.LongpoolEventParser;
-import com.ubivashka.vk.api.providers.VkApiProvider;
+import com.ubivashka.vk.api.providers.AbstractVkApiProvider;
 import com.ubivashka.vk.bungee.BungeeVkApiPlugin;
 import com.ubivashka.vk.bungee.parsers.BungeeLongpoolEventParser;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class BungeeVkApiProvider implements VkApiProvider {
+public class BungeeVkApiProvider extends AbstractVkApiProvider {
+    public BungeeVkApiProvider(PluginConfig pluginConfig) {
+        super(pluginConfig, new BungeeLongpoolEventParser(
+                BungeeVkApiPlugin.getInstance()));
 
-	private final LongpoolEventParser longpoolEventParser = new BungeeLongpoolEventParser(
-			BungeeVkApiPlugin.getInstance());
-	private final GroupActor groupActor;
-	private final VkApiClient vkApiClient;
-
-	public BungeeVkApiProvider(PluginConfig pluginConfig) {
-		this.groupActor = new GroupActor(pluginConfig.getGroupId(), pluginConfig.getGroupToken());
-		this.vkApiClient = new VkApiClient(HttpTransportClient.getInstance());
-
-		try {
-			vkApiClient.messages().getLongPollServer(groupActor).execute();
-		} catch (ApiException e) {
-			System.out.println(ChatColor.RED + "Код ошибки: " + e.getCode());
-			System.out.println(ChatColor.RED + "В сайте https://vk.com/dev/errors описаны все ошибки связанные с ВК");
-			e.printStackTrace();
-		} catch (ClientException e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public GroupActor getActor() {
-		return groupActor;
-	}
-
-	@Override
-	public VkApiClient getVkApiClient() {
-		return vkApiClient;
-	}
-
-	@Override
-	public LongpoolEventParser getLongpoolParser() {
-		return longpoolEventParser;
-	}
+        try {
+            vkApiClient.messages().getLongPollServer(groupActor).execute();
+        } catch(ApiException e) {
+            System.out.println(ChatColor.RED + "Код ошибки: " + e.getCode());
+            System.out.println(ChatColor.RED + "В сайте https://vk.com/dev/errors описаны все ошибки связанные с ВК");
+            e.printStackTrace();
+        } catch(ClientException e) {
+            e.printStackTrace();
+        }
+    }
 }
