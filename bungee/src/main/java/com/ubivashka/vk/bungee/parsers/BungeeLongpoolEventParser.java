@@ -75,13 +75,10 @@ import com.vk.api.sdk.objects.video.Video;
 import com.vk.api.sdk.objects.wall.WallComment;
 import com.vk.api.sdk.objects.wall.Wallpost;
 
-import net.md_5.bungee.api.plugin.Event;
-import net.md_5.bungee.config.Configuration;
-
 public class BungeeLongpoolEventParser extends AbstractLongpoolEventParser {
-	private VkApiPlugin<Event, Configuration> plugin;
+	private VkApiPlugin plugin;
 
-	public BungeeLongpoolEventParser(VkApiPlugin<Event, Configuration> plugin) {
+	public BungeeLongpoolEventParser(VkApiPlugin plugin) {
 		this.plugin = plugin;
 	}
 

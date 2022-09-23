@@ -1,8 +1,5 @@
 package com.ubivashka.vk.bukkit.parsers;
 
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.event.Event;
-
 import com.google.gson.JsonObject;
 import com.ubivashka.vk.api.VkApiPlugin;
 import com.ubivashka.vk.api.parsers.AbstractLongpoolEventParser;
@@ -79,9 +76,9 @@ import com.vk.api.sdk.objects.wall.WallComment;
 import com.vk.api.sdk.objects.wall.Wallpost;
 
 public class BukkitLongpoolEventParser extends AbstractLongpoolEventParser {
-	private VkApiPlugin<Event, ConfigurationSection> plugin;
+	private VkApiPlugin plugin;
 
-	public BukkitLongpoolEventParser(VkApiPlugin<Event, ConfigurationSection> plugin) {
+	public BukkitLongpoolEventParser(VkApiPlugin plugin) {
 		this.plugin = plugin;
 	}
 

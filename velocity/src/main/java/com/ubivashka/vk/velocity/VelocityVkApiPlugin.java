@@ -10,7 +10,6 @@ import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.api.listeners.LongpoolAPIListener;
 import com.ubivashka.vk.api.parsers.LongpoolEventParser;
 import com.ubivashka.vk.api.providers.VkApiProvider;
-import com.ubivashka.vk.event.VkGroupEvent;
 import com.ubivashka.vk.velocity.config.VelocityPluginConfig;
 import com.ubivashka.vk.velocity.parsers.VelocityLongpoolEventParser;
 import com.ubivashka.vk.velocity.providers.VelocityVkApiProvider;
@@ -22,10 +21,8 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
 
-import ninja.leaping.configurate.ConfigurationNode;
-
 @Plugin(id = "vk-api", name = "VK-API", version = "0.3.2", authors = "Ubivashka")
-public class VelocityVkApiPlugin implements VkApiPlugin<VkGroupEvent, ConfigurationNode> {
+public class VelocityVkApiPlugin implements VkApiPlugin {
 
 	private static VelocityVkApiPlugin instance;
 
@@ -49,7 +46,7 @@ public class VelocityVkApiPlugin implements VkApiPlugin<VkGroupEvent, Configurat
 		this.pluginConfig = new VelocityPluginConfig(this);
 		this.longpoolEventParser = new VelocityLongpoolEventParser(this);
 		this.velocityVkApiProvider = new VelocityVkApiProvider(pluginConfig);
-		new LongpoolAPIListener<>(this);
+		new LongpoolAPIListener(this);
 	}
 
 	@Deprecated
@@ -76,12 +73,12 @@ public class VelocityVkApiPlugin implements VkApiPlugin<VkGroupEvent, Configurat
 	}
 
 	@Override
-	public PluginConfig<ConfigurationNode> getPluginConfig() {
+	public PluginConfig getPluginConfig() {
 		return pluginConfig;
 	}
 
 	@Override
-	public void callEvent(VkGroupEvent event) {
+	public void callEvent(Object event) {
 		proxyServer.getEventManager().fire(event);
 	}
 

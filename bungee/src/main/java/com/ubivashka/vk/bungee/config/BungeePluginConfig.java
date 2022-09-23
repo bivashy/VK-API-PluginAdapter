@@ -3,7 +3,6 @@ package com.ubivashka.vk.bungee.config;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.CopyOption;
 import java.nio.file.Files;
 
 import com.ubivashka.vk.api.config.PluginConfig;
@@ -13,7 +12,7 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-public class BungeePluginConfig implements PluginConfig<Configuration> {
+public class BungeePluginConfig implements PluginConfig {
 
 	private Configuration configuration;
 	private Integer longpoolSchedulerDelay, groupId;
@@ -42,7 +41,7 @@ public class BungeePluginConfig implements PluginConfig<Configuration> {
 	}
 
 	@Override
-	public Configuration getConfiguration() {
+	public Object getConfiguration() {
 		return configuration;
 	}
 
@@ -53,7 +52,7 @@ public class BungeePluginConfig implements PluginConfig<Configuration> {
 
 			File config = new File(folder + File.separator + "config.yml");
 			if (!config.exists())
-				Files.copy(resourceAsStream, config.toPath(), new CopyOption[0]);
+				Files.copy(resourceAsStream, config.toPath());
 			Configuration defaults = ConfigurationProvider.getProvider(YamlConfiguration.class).load(resourceAsStream);
 			return ConfigurationProvider.getProvider(YamlConfiguration.class).load(config, defaults);
 		} catch (IOException exception) {

@@ -1,7 +1,5 @@
 package com.ubivashka.vk.velocity.providers;
 
-import java.util.Arrays;
-
 import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.api.parsers.LongpoolEventParser;
 import com.ubivashka.vk.api.providers.VkApiProvider;
@@ -12,9 +10,6 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.objects.messages.Message;
-
-import ninja.leaping.configurate.ConfigurationNode;
 
 public class VelocityVkApiProvider implements VkApiProvider {
 	private final LongpoolEventParser longpoolEventParser = new VelocityLongpoolEventParser(
@@ -22,7 +17,7 @@ public class VelocityVkApiProvider implements VkApiProvider {
 	private final GroupActor groupActor;
 	private final VkApiClient vkApiClient;
 
-	public VelocityVkApiProvider(PluginConfig<ConfigurationNode> pluginConfig) {
+	public VelocityVkApiProvider(PluginConfig pluginConfig) {
 		this.groupActor = new GroupActor(pluginConfig.getGroupId(), pluginConfig.getGroupToken());
 		this.vkApiClient = new VkApiClient(HttpTransportClient.getInstance());
 
@@ -50,17 +45,5 @@ public class VelocityVkApiProvider implements VkApiProvider {
 	@Override
 	public LongpoolEventParser getLongpoolParser() {
 		return longpoolEventParser;
-	}
-
-	@Override
-	public boolean deleteMessage(Message message) {
-		try {
-			vkApiClient.messages().delete(groupActor).messageIds(Arrays.asList(message.getId())).deleteForAll(true)
-					.execute();
-			return true;
-		} catch (ApiException | ClientException e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 }

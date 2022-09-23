@@ -3,7 +3,6 @@ package com.ubivashka.vk.bukkit;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,62 +19,65 @@ import com.vk.api.sdk.client.actors.GroupActor;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class BukkitVkApiPlugin extends JavaPlugin implements VkApiPlugin<Event, ConfigurationSection> {
-	private BukkitVkApiProvider vkApiProvider;
-	private BukkitPluginConfig pluginConfig;
+public class BukkitVkApiPlugin extends JavaPlugin implements VkApiPlugin {
+    private BukkitVkApiProvider vkApiProvider;
+    private BukkitPluginConfig pluginConfig;
 
-	@Override
-	public void onEnable() {
-		Logger coreLogger = (Logger) LogManager.getRootLogger();
-		coreLogger.addFilter(new LogFilter());
+    @Override
+    public void onEnable() {
+        Logger coreLogger = (Logger) LogManager.getRootLogger();
+        coreLogger.addFilter(new LogFilter());
 
-		pluginConfig = new BukkitPluginConfig(this);
-		vkApiProvider = new BukkitVkApiProvider(pluginConfig);
+        pluginConfig = new BukkitPluginConfig(this);
+        vkApiProvider = new BukkitVkApiProvider(pluginConfig);
 
-		new LongpoolAPIListener<>(this);
+        new LongpoolAPIListener(this);
 
-		Bukkit.getConsoleSender()
-				.sendMessage("\n\r" + ChatColor.BLUE + " ##      ## ##   ##           ##     #######  ##\r\n"
-						+ ChatColor.BLUE + "/##     /##/##  ##           ####   /##////##/##\r\n" + ChatColor.BLUE
-						+ "/##     /##/## ##           ##//##  /##   /##/##\r\n" + ChatColor.BLUE
-						+ "//##    ## /####    #####  ##  //## /####### /##\r\n" + ChatColor.BLUE
-						+ " //##  ##  /##/##  /////  ##########/##////  /##\r\n" + ChatColor.BLUE
-						+ "  //####   /##//##       /##//////##/##      /##\r\n" + ChatColor.BLUE
-						+ "   //##    /## //##      /##     /##/##      /##\r\n" + ChatColor.BLUE
-						+ "    //     //   //       //      // //       // \r\n");
+        Bukkit.getConsoleSender()
+                .sendMessage("\n\r" + ChatColor.BLUE + " ##      ## ##   ##           ##     #######  ##\r\n"
+                        + ChatColor.BLUE + "/##     /##/##  ##           ####   /##////##/##\r\n" + ChatColor.BLUE
+                        + "/##     /##/## ##           ##//##  /##   /##/##\r\n" + ChatColor.BLUE
+                        + "//##    ## /####    #####  ##  //## /####### /##\r\n" + ChatColor.BLUE
+                        + " //##  ##  /##/##  /////  ##########/##////  /##\r\n" + ChatColor.BLUE
+                        + "  //####   /##//##       /##//////##/##      /##\r\n" + ChatColor.BLUE
+                        + "   //##    /## //##      /##     /##/##      /##\r\n" + ChatColor.BLUE
+                        + "    //     //   //       //      // //       // \r\n");
 
-	}
+    }
 
-	@Deprecated
-	@Override
-	public GroupActor getActor() {
-		return vkApiProvider.getActor();
-	}
+    @Deprecated
+    @Override
+    public GroupActor getActor() {
+        return vkApiProvider.getActor();
+    }
 
-	@Deprecated
-	@Override
-	public VkApiClient getVK() {
-		return vkApiProvider.getVkApiClient();
-	}
+    @Deprecated
+    @Override
+    public VkApiClient getVK() {
+        return vkApiProvider.getVkApiClient();
+    }
 
-	@Deprecated
-	@Override
-	public LongpoolEventParser getLongpoolParser() {
-		return vkApiProvider.getLongpoolParser();
-	}
+    @Deprecated
+    @Override
+    public LongpoolEventParser getLongpoolParser() {
+        return vkApiProvider.getLongpoolParser();
+    }
 
-	@Override
-	public VkApiProvider getVkApiProvider() {
-		return vkApiProvider;
-	}
+    @Override
+    public VkApiProvider getVkApiProvider() {
+        return vkApiProvider;
+    }
 
-	@Override
-	public PluginConfig<ConfigurationSection> getPluginConfig() {
-		return pluginConfig;
-	}
+    @Override
+    public PluginConfig getPluginConfig() {
+        return pluginConfig;
+    }
 
-	@Override
-	public void callEvent(Event event) {
-		Bukkit.getPluginManager().callEvent(event);
-	}
+    @Override
+    public void callEvent(Object event) {
+        if (!(event instanceof Event))
+            return;
+        Event bukkitEvent = (Event) event;
+        Bukkit.getPluginManager().callEvent(bukkitEvent);
+    }
 }

@@ -14,10 +14,10 @@ import com.vk.api.sdk.exceptions.LongPollServerKeyExpiredException;
 import com.vk.api.sdk.objects.callback.longpoll.responses.GetLongPollEventsResponse;
 import com.vk.api.sdk.objects.groups.responses.GetLongPollServerResponse;
 
-public class LongpoolAPIListener<E, T> {
+public class LongpoolAPIListener {
 	private static final int MILLI_PER_TICK = 1000 / 20;
 
-	private VkApiPlugin<E, T> plugin;
+	private VkApiPlugin plugin;
 
 	private GetLongPollServerResponse longserver;
 	private String lastTimeStamp;
@@ -25,7 +25,7 @@ public class LongpoolAPIListener<E, T> {
 	private long reconnectMillisDelay = 2;
 	private boolean reconnecting = false;
 
-	public LongpoolAPIListener(VkApiPlugin<E, T> plugin) {
+	public LongpoolAPIListener(VkApiPlugin plugin) {
 		this.plugin = plugin;
 		this.updateLongpoolServer();
 		lastTimeStamp = longserver.getTs();
@@ -39,9 +39,8 @@ public class LongpoolAPIListener<E, T> {
 				try {
 					handleEvents();
 				} catch (ClientException e) {
-					System.out.println(
-							String.format("[VK-API] Подключение прервано, попытка переподключения через %d секунд",
-									reconnectMillisDelay));
+					System.out.printf("[VK-API] Подключение прервано, попытка переподключения через %d секунд%n",
+							reconnectMillisDelay);
 
 					reconnecting = true;
 					try {

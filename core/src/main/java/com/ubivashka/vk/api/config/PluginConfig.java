@@ -1,11 +1,11 @@
 package com.ubivashka.vk.api.config;
 
-public interface PluginConfig<T> {
+public interface PluginConfig {
 	Integer getLongpoolSchedulerDelay();
 
 	Integer getGroupId();
 
 	String getGroupToken();
 
-	T getConfiguration();
+	Object getConfiguration();
 }

@@ -5,7 +5,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.bukkit.BukkitVkApiPlugin;
 
-public class BukkitPluginConfig implements PluginConfig<ConfigurationSection> {
+public class BukkitPluginConfig implements PluginConfig {
 
 	private ConfigurationSection configuration;
 	private Integer longpoolSchedulerDelay, groupId;
@@ -35,7 +35,7 @@ public class BukkitPluginConfig implements PluginConfig<ConfigurationSection> {
 	}
 
 	@Override
-	public ConfigurationSection getConfiguration() {
+	public Object getConfiguration() {
 		return configuration;
 	}
 

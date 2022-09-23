@@ -1,7 +1,6 @@
 package com.ubivashka.vk.bungee;
 
 import java.util.logging.Level;
-import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 import com.ubivashka.vk.api.VkApiPlugin;
@@ -18,93 +17,91 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Event;
 import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.config.Configuration;
 
-public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin<Event, Configuration> {
-	private static BungeeVkApiPlugin instance;
-	private BungeeVkApiProvider vkApiProvider;
-	private BungeePluginConfig pluginConfig;
+public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin {
+    private static BungeeVkApiPlugin instance;
+    private BungeeVkApiProvider vkApiProvider;
+    private BungeePluginConfig pluginConfig;
 
-	@Override
-	public void onEnable() {
-		instance = this;
-		enableLogFiltering();
+    @Override
+    public void onEnable() {
+        instance = this;
+        enableLogFiltering();
 
-		pluginConfig = new BungeePluginConfig(this);
-		vkApiProvider = new BungeeVkApiProvider(pluginConfig);
+        pluginConfig = new BungeePluginConfig(this);
+        vkApiProvider = new BungeeVkApiProvider(pluginConfig);
 
-		new LongpoolAPIListener<>(this);
+        new LongpoolAPIListener(this);
 
-		System.out.println("\r\n\r\n" + ChatColor.DARK_AQUA
-				+ "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
-						ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
-				+ ChatColor.AQUA + "╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝\r\n" + ChatColor.BLUE
-				+ "██╗░░░██╗██╗░░██╗░░░░░░░█████╗░██████╗░██╗\r\n" + ChatColor.BLUE
-				+ "██║░░░██║██║░██╔╝░░░░░░██╔══██╗██╔══██╗██║\r\n" + ChatColor.BLUE
-				+ "╚██╗░██╔╝█████═╝░█████╗███████║██████╔╝██║\r\n" + ChatColor.BLUE
-				+ "░╚████╔╝░██╔═██╗░╚════╝██╔══██║██╔═══╝░██║\r\n" + ChatColor.BLUE
-				+ "░░╚██╔╝░░██║░╚██╗░░░░░░██║░░██║██║░░░░░██║\r\n" + ChatColor.BLUE
-				+ "░░░╚═╝░░░╚═╝░░╚═╝░░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝\r\n" + ChatColor.DARK_AQUA
-				+ "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
-						ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
-				+ ChatColor.AQUA + "╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝\r\n");
+        System.out.println("\r\n\r\n" + ChatColor.DARK_AQUA
+                + "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
+                ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
+                + ChatColor.AQUA + "╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝\r\n" + ChatColor.BLUE
+                + "██╗░░░██╗██╗░░██╗░░░░░░░█████╗░██████╗░██╗\r\n" + ChatColor.BLUE
+                + "██║░░░██║██║░██╔╝░░░░░░██╔══██╗██╔══██╗██║\r\n" + ChatColor.BLUE
+                + "╚██╗░██╔╝█████═╝░█████╗███████║██████╔╝██║\r\n" + ChatColor.BLUE
+                + "░╚████╔╝░██╔═██╗░╚════╝██╔══██║██╔═══╝░██║\r\n" + ChatColor.BLUE
+                + "░░╚██╔╝░░██║░╚██╗░░░░░░██║░░██║██║░░░░░██║\r\n" + ChatColor.BLUE
+                + "░░░╚═╝░░░╚═╝░░╚═╝░░░░░░╚═╝░░╚═╝╚═╝░░░░░╚═╝\r\n" + ChatColor.DARK_AQUA
+                + "█████╗█████╗█████╗█████╗█████╗█████╗█████╗\r\n".replaceAll("╗",
+                ChatColor.AQUA + "╗" + ChatColor.DARK_AQUA)
+                + ChatColor.AQUA + "╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝╚════╝\r\n");
 
-	}
+    }
 
-	@Deprecated
-	@Override
-	public GroupActor getActor() {
-		return vkApiProvider.getActor();
-	}
+    @Deprecated
+    @Override
+    public GroupActor getActor() {
+        return vkApiProvider.getActor();
+    }
 
-	@Deprecated
-	@Override
-	public VkApiClient getVK() {
-		return vkApiProvider.getVkApiClient();
-	}
+    @Deprecated
+    @Override
+    public VkApiClient getVK() {
+        return vkApiProvider.getVkApiClient();
+    }
 
-	@Deprecated
-	@Override
-	public LongpoolEventParser getLongpoolParser() {
-		return vkApiProvider.getLongpoolParser();
-	}
+    @Deprecated
+    @Override
+    public LongpoolEventParser getLongpoolParser() {
+        return vkApiProvider.getLongpoolParser();
+    }
 
-	@Override
-	public VkApiProvider getVkApiProvider() {
-		return vkApiProvider;
-	}
+    @Override
+    public VkApiProvider getVkApiProvider() {
+        return vkApiProvider;
+    }
 
-	@Override
-	public PluginConfig<Configuration> getPluginConfig() {
-		return pluginConfig;
-	}
+    @Override
+    public PluginConfig getPluginConfig() {
+        return pluginConfig;
+    }
 
-	@Override
-	public void callEvent(Event event) {
-		ProxyServer.getInstance().getPluginManager().callEvent(event);
-	}
+    @Override
+    public void callEvent(Object event) {
+        if (!(event instanceof Event))
+            return;
+        Event bungeeEvent = (Event) event;
+        ProxyServer.getInstance().getPluginManager().callEvent(bungeeEvent);
+    }
 
-	private void enableLogFiltering() {
-		Logger logger = ProxyServer.getInstance().getLogger();
-		logger.setFilter(new java.util.logging.Filter() {
-			public boolean isLoggable(LogRecord record) {
-				String message = record.getMessage();
-				if (message.startsWith("Request: https://api.vk.com/")
-						|| message.startsWith("Request: https://lp.vk.com/") || message.startsWith("ERROR StatusLogger")
-						|| message.startsWith("SLF4J: Failed to load class")
-						|| message.startsWith("SLF4J: Defaulting to no-operation")
-						|| message.startsWith("SLF4J: See http:")
-						|| (message.contains("lp.vk.com") && record.getLevel() == Level.SEVERE)
-						|| (message.startsWith("Event {0}") && record.getParameters().length > 0
-								&& record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
-								&& record.getLevel() == Level.WARNING))
-					return false;
-				return true;
-			}
-		});
-	}
+    private void enableLogFiltering() {
+        Logger logger = ProxyServer.getInstance().getLogger();
+        logger.setFilter(record -> {
+            String message = record.getMessage();
+            return !message.startsWith("Request: https://api.vk.com/")
+                    && !message.startsWith("Request: https://lp.vk.com/") && !message.startsWith("ERROR StatusLogger")
+                    && !message.startsWith("SLF4J: Failed to load class")
+                    && !message.startsWith("SLF4J: Defaulting to no-operation")
+                    && !message.startsWith("SLF4J: See http:")
+                    && (!message.contains("lp.vk.com") || record.getLevel() != Level.SEVERE)
+                    && (!message.startsWith("Event {0}") || record.getParameters().length <= 0
+                    || !record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
+                    || record.getLevel() != Level.WARNING);
+        });
+    }
 
-	public static BungeeVkApiPlugin getInstance() {
-		return instance;
-	}
+    public static BungeeVkApiPlugin getInstance() {
+        return instance;
+    }
 }

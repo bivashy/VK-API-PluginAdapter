@@ -11,7 +11,7 @@ import com.ubivashka.vk.velocity.VelocityVkApiPlugin;
 import ninja.leaping.configurate.ConfigurationNode;
 import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 
-public class VelocityPluginConfig implements PluginConfig<ConfigurationNode> {
+public class VelocityPluginConfig implements PluginConfig {
 	private static final String CONFIGURATION_FILE_NAME = "config.yml";
 
 	private final VelocityVkApiPlugin plugin;
@@ -43,7 +43,7 @@ public class VelocityPluginConfig implements PluginConfig<ConfigurationNode> {
 	}
 
 	@Override
-	public ConfigurationNode getConfiguration() {
+	public Object getConfiguration() {
 		return configuration;
 	}
 
