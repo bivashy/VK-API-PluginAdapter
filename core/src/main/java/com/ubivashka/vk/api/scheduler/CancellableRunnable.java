@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  * @author vladimir-bukhtoyarov source from
- *         https://gist.github.com/vladimir-bukhtoyarov/b71fe668ce53e1e81856ccc7e99a3150
+ *         <a href="https://gist.github.com/vladimir-bukhtoyarov/b71fe668ce53e1e81856ccc7e99a3150">...</a>
  */
 public abstract class CancellableRunnable implements Runnable {
 	private Scheduler scheduler;
@@ -20,7 +20,7 @@ public abstract class CancellableRunnable implements Runnable {
 	}
 
 	protected void setScheduler(Scheduler scheduler) {
-		if (scheduler != null)
+		if (scheduler == null)
 			return;
 		this.scheduler = scheduler;
 	}
