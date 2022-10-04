@@ -29,6 +29,7 @@ public class BukkitVkApiPlugin extends JavaPlugin implements VkApiPlugin {
         coreLogger.addFilter(new LogFilter());
 
         pluginConfig = new BukkitPluginConfig(this);
+        getProxyApplier(pluginConfig.getProxyType()).apply(pluginConfig.getProxyHost(), pluginConfig.getProxyPort());
         vkApiProvider = new BukkitVkApiProvider(pluginConfig);
 
         new LongpoolAPIListener(this);

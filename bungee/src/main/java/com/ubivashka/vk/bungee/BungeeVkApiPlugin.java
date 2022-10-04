@@ -29,6 +29,7 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin {
         enableLogFiltering();
 
         pluginConfig = new BungeePluginConfig(this);
+        getProxyApplier(pluginConfig.getProxyType()).apply(pluginConfig.getProxyHost(), pluginConfig.getProxyPort());
         vkApiProvider = new BungeeVkApiProvider(pluginConfig);
 
         new LongpoolAPIListener(this);

@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Optional;
+import java.util.stream.IntStream;
 
 import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.bungee.BungeeVkApiPlugin;
+import com.ubivashka.vk.http.proxy.DefaultSystemProxyApplier;
 
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -15,14 +18,17 @@ import net.md_5.bungee.config.YamlConfiguration;
 public class BungeePluginConfig implements PluginConfig {
 
     private Configuration configuration;
-    private Integer longpoolSchedulerDelay, groupId;
-    private String groupToken;
+    private Integer longpoolSchedulerDelay, groupId, proxyPort;
+    private String groupToken, proxyType, proxyHost;
 
     public BungeePluginConfig(BungeeVkApiPlugin plugin) {
         configuration = loadConfiguration(plugin.getDataFolder(), plugin.getResourceAsStream("config.yml"));
-        longpoolSchedulerDelay = configuration.getInt("settings.delay");
-        groupId = configuration.getInt("groupInfo.groupID", -1);
-        groupToken = configuration.getString("groupInfo.groupToken");
+        longpoolSchedulerDelay = getInt(SETTINGS_KEY, SCHEDULER_DELAY_KEY);
+        groupId = getInt(-1, GROUP_INFO_KEY, GROUP_ID_KEY);
+        groupToken = getString(GROUP_INFO_KEY, GROUP_TOKEN_KEY);
+        proxyType = getStringDefault(DefaultSystemProxyApplier.NONE.name(), PROXY_KEY, PROXY_TYPE_KEY);
+        proxyHost = getString(PROXY_KEY, PROXY_HOST_KEY);
+        proxyPort = getInt(PROXY_KEY, PROXY_PORT_KEY);
     }
 
     @Override
@@ -38,6 +44,39 @@ public class BungeePluginConfig implements PluginConfig {
     @Override
     public String getGroupToken() {
         return groupToken;
+    }
+
+    @Override
+    public String getProxyType() {
+        return proxyType;
+    }
+
+    @Override
+    public String getProxyHost() {
+        return proxyHost;
+    }
+
+    @Override
+    public Integer getProxyPort() {
+        return proxyPort;
+    }
+
+    @Override
+    public String getStringDefault(String def, String... path) {
+        return getSection(path).map(section -> section.getString(path[path.length - 1], def)).orElse(def);
+    }
+
+    @Override
+    public int getInt(int def, String... path) {
+        return getSection(path).map(section -> section.getInt(path[path.length - 1], def)).orElse(def);
+    }
+
+    private Optional<Configuration> getSection(String... path) {
+        return Optional.ofNullable(IntStream.range(0, path.length - 1).boxed().map(index -> path[index]).reduce(configuration, (section, key) -> {
+            if (section == null)
+                return null;
+            return section.getSection(key);
+        }, (first, second) -> first));
     }
 
     @Override

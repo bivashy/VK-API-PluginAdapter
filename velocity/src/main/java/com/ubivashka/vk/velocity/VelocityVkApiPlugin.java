@@ -21,7 +21,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
 
-@Plugin(id = "vk-api", name = "VK-API", version = "0.3.2", authors = "Ubivashka")
+@Plugin(id = "vk-api", name = "VK-API", version = "0.4.0", authors = "Ubivashka")
 public class VelocityVkApiPlugin implements VkApiPlugin {
 
 	private static VelocityVkApiPlugin instance;
@@ -44,6 +44,7 @@ public class VelocityVkApiPlugin implements VkApiPlugin {
 	@Subscribe
 	public void onEnable(ProxyInitializeEvent event) {
 		this.pluginConfig = new VelocityPluginConfig(this);
+		getProxyApplier(pluginConfig.getProxyType()).apply(pluginConfig.getProxyHost(), pluginConfig.getProxyPort());
 		this.longpoolEventParser = new VelocityLongpoolEventParser(this);
 		this.velocityVkApiProvider = new VelocityVkApiProvider(pluginConfig);
 		new LongpoolAPIListener(this);
