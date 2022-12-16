@@ -1,17 +1,14 @@
 package com.ubivashka.vk.bungee;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.ubivashka.vk.api.VkApiPlugin;
 import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.api.listeners.LongpoolAPIListener;
-import com.ubivashka.vk.api.parsers.LongpoolEventParser;
 import com.ubivashka.vk.api.providers.VkApiProvider;
 import com.ubivashka.vk.bungee.config.BungeePluginConfig;
+import com.ubivashka.vk.bungee.logging.filter.VkLoggingFilter;
 import com.ubivashka.vk.bungee.providers.BungeeVkApiProvider;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.GroupActor;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ProxyServer;
@@ -26,10 +23,11 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        enableLogFiltering();
-
         pluginConfig = new BungeePluginConfig(this);
+
+        enableLogFiltering();
         getProxyApplier(pluginConfig.getProxyType()).apply(pluginConfig.getProxyHost(), pluginConfig.getProxyPort());
+
         vkApiProvider = new BungeeVkApiProvider(pluginConfig);
 
         new LongpoolAPIListener(this);
@@ -69,19 +67,8 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin {
     }
 
     private void enableLogFiltering() {
-        Logger logger = ProxyServer.getInstance().getLogger();
-        logger.setFilter(record -> {
-            String message = record.getMessage();
-            return !message.startsWith("Request: https://api.vk.com/")
-                    && !message.startsWith("Request: https://lp.vk.com/") && !message.startsWith("ERROR StatusLogger")
-                    && !message.startsWith("SLF4J: Failed to load class")
-                    && !message.startsWith("SLF4J: Defaulting to no-operation")
-                    && !message.startsWith("SLF4J: See http:")
-                    && (!message.contains("lp.vk.com") || record.getLevel() != Level.SEVERE)
-                    && (!message.startsWith("Event {0}") || record.getParameters().length <= 0
-                    || !record.getParameters()[0].toString().startsWith("com.ubivashka.vk.bungee.events")
-                    || record.getLevel() != Level.WARNING);
-        });
+        Logger logger = getLogger();
+        logger.setFilter(new VkLoggingFilter(this));
     }
 
     public static BungeeVkApiPlugin getInstance() {

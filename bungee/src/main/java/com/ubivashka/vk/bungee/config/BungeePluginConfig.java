@@ -4,12 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.IntStream;
+import java.util.function.BiFunction;
 
 import com.ubivashka.vk.api.config.PluginConfig;
 import com.ubivashka.vk.bungee.BungeeVkApiPlugin;
-import com.ubivashka.vk.http.proxy.DefaultSystemProxyApplier;
 
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -18,26 +18,28 @@ import net.md_5.bungee.config.YamlConfiguration;
 public class BungeePluginConfig implements PluginConfig {
 
     private Configuration configuration;
-    private Integer longpoolSchedulerDelay, groupId, proxyPort;
+    private int longpoolSchedulerDelay, groupId, proxyPort;
     private String groupToken, proxyType, proxyHost;
+    private boolean loggingEnabled;
 
     public BungeePluginConfig(BungeeVkApiPlugin plugin) {
         configuration = loadConfiguration(plugin.getDataFolder(), plugin.getResourceAsStream("config.yml"));
         longpoolSchedulerDelay = getInt(SETTINGS_KEY, SCHEDULER_DELAY_KEY);
-        groupId = getInt(-1, GROUP_INFO_KEY, GROUP_ID_KEY);
+        groupId = getInt(GROUP_INFO_KEY, GROUP_ID_KEY);
         groupToken = getString(GROUP_INFO_KEY, GROUP_TOKEN_KEY);
-        proxyType = getStringDefault(DefaultSystemProxyApplier.NONE.name(), PROXY_KEY, PROXY_TYPE_KEY);
+        proxyType = getStringDefault(DEFAULT_PORT_TYPE, PROXY_KEY, PROXY_TYPE_KEY);
         proxyHost = getString(PROXY_KEY, PROXY_HOST_KEY);
         proxyPort = getInt(PROXY_KEY, PROXY_PORT_KEY);
+        loggingEnabled = getBoolean(SETTINGS_KEY, LOGGING_ENABLED_KEY);
     }
 
     @Override
-    public Integer getLongpoolSchedulerDelay() {
+    public int getLongpoolSchedulerDelay() {
         return longpoolSchedulerDelay;
     }
 
     @Override
-    public Integer getGroupId() {
+    public int getGroupId() {
         return groupId;
     }
 
@@ -57,31 +59,40 @@ public class BungeePluginConfig implements PluginConfig {
     }
 
     @Override
-    public Integer getProxyPort() {
+    public int getProxyPort() {
         return proxyPort;
     }
 
     @Override
-    public String getStringDefault(String def, String... path) {
-        return getSection(path).map(section -> section.getString(path[path.length - 1], def)).orElse(def);
+    public boolean isLoggingEnabled() {
+        return loggingEnabled;
     }
 
-    @Override
-    public int getInt(int def, String... path) {
-        return getSection(path).map(section -> section.getInt(path[path.length - 1], def)).orElse(def);
+    private boolean getBoolean(String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getBoolean(key))).orElse(false);
     }
 
-    private Optional<Configuration> getSection(String... path) {
-        return Optional.ofNullable(IntStream.range(0, path.length - 1).boxed().map(index -> path[index]).reduce(configuration, (section, key) -> {
-            if (section == null)
-                return null;
-            return section.getSection(key);
-        }, (first, second) -> first));
+    private String getString(String... path) {
+        return getStringDefault("", path);
     }
 
-    @Override
-    public Object getConfiguration() {
-        return configuration;
+    private String getStringDefault(String def, String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getString(key)), path).orElse(def);
+    }
+
+    private int getInt(String... path) {
+        return getInt(-1, path);
+    }
+
+    private int getInt(int def, String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getInt(key)), path).orElse(def);
+    }
+
+    private <T> Optional<T> getSection(BiFunction<Optional<Configuration>, String, Optional<T>> mapper, String... path) {
+        int limit = path.length - 1;
+        String valueKey = path[limit];
+        return mapper.apply(Optional.ofNullable(Arrays.stream(path).limit(limit).reduce(configuration, Configuration::getSection, (first, second) -> first)),
+                valueKey);
     }
 
     private Configuration loadConfiguration(File folder, InputStream resourceAsStream) {
