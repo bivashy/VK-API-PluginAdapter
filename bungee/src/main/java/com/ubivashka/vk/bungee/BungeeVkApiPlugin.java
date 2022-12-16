@@ -50,24 +50,6 @@ public class BungeeVkApiPlugin extends Plugin implements VkApiPlugin {
 
     }
 
-    @Deprecated
-    @Override
-    public GroupActor getActor() {
-        return vkApiProvider.getActor();
-    }
-
-    @Deprecated
-    @Override
-    public VkApiClient getVK() {
-        return vkApiProvider.getVkApiClient();
-    }
-
-    @Deprecated
-    @Override
-    public LongpoolEventParser getLongpoolParser() {
-        return vkApiProvider.getLongpoolParser();
-    }
-
     @Override
     public VkApiProvider getVkApiProvider() {
         return vkApiProvider;
