@@ -3,6 +3,7 @@ groupInfo:
   groupToken: 'yourTokenHere'
 settings:
   delay: 15 #ВНИМАНИЕ! Не ставьте слишком низкие числа ( не ниже 10)
+  logging: false # Логирование, нужно при анализе запросов
 # Поддержка прокси серверов, необходим если сайт vk.com не работает
 proxy:
   # NONE, HTTP, HTTPS, FTP, SOCKS

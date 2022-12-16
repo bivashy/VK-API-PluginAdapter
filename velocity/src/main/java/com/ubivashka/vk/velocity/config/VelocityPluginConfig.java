@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 import com.ubivashka.vk.api.config.PluginConfig;
-import com.ubivashka.vk.http.proxy.DefaultSystemProxyApplier;
 import com.ubivashka.vk.velocity.VelocityVkApiPlugin;
 
 import ninja.leaping.configurate.ConfigurationNode;
@@ -17,27 +16,27 @@ public class VelocityPluginConfig implements PluginConfig {
 
     private final VelocityVkApiPlugin plugin;
     private final ConfigurationNode configuration;
-    private Integer longpoolSchedulerDelay, groupId, proxyPort;
+    private int longpoolSchedulerDelay, groupId, proxyPort;
     private String groupToken, proxyType, proxyHost;
 
     public VelocityPluginConfig(VelocityVkApiPlugin plugin) {
         this.plugin = plugin;
         configuration = saveDefaultConfiguration();
         longpoolSchedulerDelay = getInt(SETTINGS_KEY, SCHEDULER_DELAY_KEY);
-        groupId = getInt(-1, GROUP_INFO_KEY, GROUP_ID_KEY);
+        groupId = getInt(GROUP_INFO_KEY, GROUP_ID_KEY);
         groupToken = getString(GROUP_INFO_KEY, GROUP_TOKEN_KEY);
-        proxyType = getStringDefault(DefaultSystemProxyApplier.NONE.name(), PROXY_KEY, PROXY_TYPE_KEY);
+        proxyType = getStringDefault(DEFAULT_PORT_TYPE, PROXY_KEY, PROXY_TYPE_KEY);
         proxyHost = getString(PROXY_KEY, PROXY_HOST_KEY);
         proxyPort = getInt(PROXY_KEY, PROXY_PORT_KEY);
     }
 
     @Override
-    public Integer getLongpoolSchedulerDelay() {
+    public int getLongpoolSchedulerDelay() {
         return longpoolSchedulerDelay;
     }
 
     @Override
-    public Integer getGroupId() {
+    public int getGroupId() {
         return groupId;
     }
 
@@ -57,23 +56,29 @@ public class VelocityPluginConfig implements PluginConfig {
     }
 
     @Override
-    public Integer getProxyPort() {
+    public int getProxyPort() {
         return proxyPort;
     }
 
     @Override
-    public String getStringDefault(String def, String... path) {
+    public boolean isLoggingEnabled() {
+        return false;
+    }
+
+    private String getString(String... path) {
+        return getStringDefault("", path);
+    }
+
+    private String getStringDefault(String def, String... path) {
         return configuration.getNode(path).getString(def);
     }
 
-    @Override
-    public int getInt(int def, String... path) {
-        return configuration.getNode(path).getInt(def);
+    private int getInt(String... path) {
+        return getInt(-1, path);
     }
 
-    @Override
-    public Object getConfiguration() {
-        return configuration;
+    private int getInt(int def, String... path) {
+        return configuration.getNode(path).getInt(def);
     }
 
     private ConfigurationNode saveDefaultConfiguration() {

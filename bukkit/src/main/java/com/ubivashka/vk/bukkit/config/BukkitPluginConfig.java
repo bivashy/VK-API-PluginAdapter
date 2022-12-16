@@ -1,7 +1,8 @@
 package com.ubivashka.vk.bukkit.config;
 
+import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.IntStream;
+import java.util.function.BiFunction;
 
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -11,8 +12,9 @@ import com.ubivashka.vk.bukkit.BukkitVkApiPlugin;
 public class BukkitPluginConfig implements PluginConfig {
 
     private ConfigurationSection configuration;
-    private Integer longpoolSchedulerDelay, groupId, proxyPort;
+    private int longpoolSchedulerDelay, groupId, proxyPort;
     private String groupToken, proxyType, proxyHost;
+    private boolean loggingEnabled;
 
     public BukkitPluginConfig(BukkitVkApiPlugin plugin) {
         plugin.saveDefaultConfig();
@@ -23,15 +25,16 @@ public class BukkitPluginConfig implements PluginConfig {
         proxyType = getStringDefault(DEFAULT_PORT_TYPE, PROXY_KEY, PROXY_TYPE_KEY);
         proxyHost = getString(PROXY_KEY, PROXY_HOST_KEY);
         proxyPort = getInt(PROXY_KEY, PROXY_PORT_KEY);
+        loggingEnabled = getBoolean(SETTINGS_KEY, LOGGING_ENABLED_KEY);
     }
 
     @Override
-    public Integer getLongpoolSchedulerDelay() {
+    public int getLongpoolSchedulerDelay() {
         return longpoolSchedulerDelay;
     }
 
     @Override
-    public Integer getGroupId() {
+    public int getGroupId() {
         return groupId;
     }
 
@@ -51,34 +54,39 @@ public class BukkitPluginConfig implements PluginConfig {
     }
 
     @Override
-    public Integer getProxyPort() {
+    public int getProxyPort() {
         return proxyPort;
     }
 
     @Override
-    public String getStringDefault(String def, String... path) {
-        return getSection(path).map(section -> section.getString(path[path.length - 1], def)).orElse(def);
+    public boolean isLoggingEnabled() {
+        return loggingEnabled;
     }
 
-    @Override
-    public int getInt(int def, String... path) {
-        return getSection(path).map(section -> section.getInt(path[path.length - 1], def)).orElse(def);
+    private boolean getBoolean(String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getBoolean(key))).orElse(false);
     }
 
-    private Optional<ConfigurationSection> getSection(String... path) {
-        return Optional.ofNullable(IntStream.range(0, path.length - 1)
-                .boxed()
-                .map(index -> path[index])
-                .reduce(configuration, (section, key) -> {
-                    if (section == null)
-                        return null;
-                    return section.getConfigurationSection(key);
-                }, (first, second) -> first));
+    private String getString(String... path) {
+        return getStringDefault("", path);
     }
 
-    @Override
-    public Object getConfiguration() {
-        return configuration;
+    private String getStringDefault(String def, String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getString(key)), path).orElse(def);
     }
 
+    private int getInt(String... path) {
+        return getInt(-1, path);
+    }
+
+    private int getInt(int def, String... path) {
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getInt(key)), path).orElse(def);
+    }
+
+    private <T> Optional<T> getSection(BiFunction<Optional<ConfigurationSection>, String, Optional<T>> mapper, String... path) {
+        int limit = path.length - 1;
+        String valueKey = path[limit];
+        return mapper.apply(Optional.ofNullable(
+                Arrays.stream(path).limit(limit).reduce(configuration, ConfigurationSection::getConfigurationSection, (first, second) -> first)), valueKey);
+    }
 }

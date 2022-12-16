@@ -15,8 +15,8 @@ public class VelocityVkApiProvider extends AbstractVkApiProvider {
         try {
             vkApiClient.messages().getLongPollServer(groupActor).execute();
         } catch(ApiException e) {
-            System.out.println("Код ошибки: " + e.getCode());
-            System.out.println("В сайте https://vk.com/dev/errors описаны все ошибки связанные с ВК");
+            VelocityVkApiPlugin.getInstance().getLogger().warn("Код ошибки: " + e.getCode());
+            VelocityVkApiPlugin.getInstance().getLogger().warn("В сайте https://vk.com/dev/errors описаны все ошибки связанные с ВК");
             e.printStackTrace();
         } catch(ClientException e) {
             e.printStackTrace();

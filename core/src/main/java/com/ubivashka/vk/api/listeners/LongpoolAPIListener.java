@@ -72,7 +72,7 @@ public class LongpoolAPIListener {
 				}
 			}
 
-		}, 0L, plugin.getPluginConfig().getLongpoolSchedulerDelay() * MILLI_PER_TICK, TimeUnit.MILLISECONDS);
+		}, 0L, (long) plugin.getPluginConfig().getLongpoolSchedulerDelay() * MILLI_PER_TICK, TimeUnit.MILLISECONDS);
 	}
 
 	private void updateLongpoolServer() {
