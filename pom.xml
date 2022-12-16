@@ -20,7 +20,7 @@
 		<java.version>8</java.version>
 
 		<!-- Dependencies -->
-		<core.version>0.4.0</core.version>
+		<core.version>0.4.1</core.version>
 
 		<!-- Maven plugins -->
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -53,6 +53,7 @@
 					<compilerArgs>
 						<arg>-Xlint:deprecation</arg>
 						<arg>-Xlint:unchecked</arg>
+						<arg>-proc:none</arg>
 					</compilerArgs>
 					<source>${java.version}</source>
 					<target>${java.version}</target>

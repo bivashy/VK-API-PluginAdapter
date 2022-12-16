@@ -14,7 +14,7 @@
 		
 		<!-- Dependencies -->
 		<vk.java.sdk.version>1.0.9</vk.java.sdk.version>
-		<log4j.version>2.15.0</log4j.version>
+		<log4j.version>2.19.0</log4j.version>
 	</properties>
 	
 	<dependencies>

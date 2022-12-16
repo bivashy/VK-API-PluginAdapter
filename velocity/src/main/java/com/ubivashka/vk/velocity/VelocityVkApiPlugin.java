@@ -18,7 +18,7 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 
-@Plugin(id = "vk-api", name = "VK-API", version = "0.4.0", authors = "Ubivashka")
+@Plugin(id = "vk-api", name = "VK-API", version = "0.4.1", authors = "Ubivashka")
 public class VelocityVkApiPlugin implements VkApiPlugin {
 
     private static VelocityVkApiPlugin instance;
