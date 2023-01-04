@@ -69,7 +69,7 @@ public class BungeePluginConfig implements PluginConfig {
     }
 
     private boolean getBoolean(String... path) {
-        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getBoolean(key))).orElse(false);
+        return getSection((sectionOptional, key) -> sectionOptional.map(section -> section.getBoolean(key)), path).orElse(false);
     }
 
     private String getString(String... path) {
