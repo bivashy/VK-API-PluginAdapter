@@ -1,28 +1,5 @@
-/target/
-/.classpath
-/.project
-/.settings
-/bukkit/.settings
-/bukkit/.classpath
-/bukkit/target
-/bukkit/.project
-/bungee/.settings
-/bungee/.classpath
-/bungee/target
-/bungee/.project
-/core/.project
-/core/.classpath
-/core/target
-/core/.settings
-/velocity/.settings
-/velocity/.classpath
-/velocity/.project
-/velocity/target
-/examples/.settings
-/examples/target
-/examples/.classpath
-/examples/.project
-/core/dependency-reduced-pom.xml
-/velocity/dependency-reduced-pom.xml
-/bungee/dependency-reduced-pom.xml
-/bukkit/dependency-reduced-pom.xml
+# IntellijIDEA folders
+.idea/
+
+# Maven shade result files
+**/dependency-reduced-pom.xml
